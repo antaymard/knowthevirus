@@ -1,0 +1,23 @@
+{
+  "name": "covid",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antaymard/knowthevirus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antaymard/knowthevirus/issues"
+  },
+  "homepage": "https://github.com/antaymard/knowthevirus#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "npx": "^10.2.2"
+  }
+}
