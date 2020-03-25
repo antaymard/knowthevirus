@@ -1,0 +1,23 @@
+header {
+  width: 100%;
+  background-color: var(--transparentBackground);
+  height: 78px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input#country-searchbar {
+  background-color: white;
+  border-radius: var(--borderRadius);
+  height: 50px;
+  background: var(--transparentBackground);
+  border: none;
+  min-width: 200px;
+  text-align: center;
+  color: white;
+}
+input#country-searchbar::placeholder {
+  color: white;
+}
