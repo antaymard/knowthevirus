@@ -7,7 +7,8 @@ var colors = require('colors');
 // Set colors for console.log()
 colors.setTheme({
     success: 'green',
-    error: 'red'
+    error: 'red',
+    info: 'grey'
 });
 
 // json processing boilerplate

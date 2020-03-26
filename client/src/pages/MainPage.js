@@ -17,7 +17,6 @@ L’axe des dates correspond donc à des dates relatives (x jours après le 10e 
             <div className="main-page-section">
                 <div className="left-part">
                     <div className="card" style={{ height: "600px", marginBottom: "20px" }}>
-
                         ICI la courbe
                     </div>
                     <div className="card chart-settings-section">
@@ -44,8 +43,6 @@ L’axe des dates correspond donc à des dates relatives (x jours après le 10e 
                 <div className="right-part">
                 </div>
             </div>
-
-
         </div>
     );
 }
