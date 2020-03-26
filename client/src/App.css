@@ -1,5 +1,11 @@
-.app-section {
+.app {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.app-body {
+  max-width: var(--maxWidthDesktop);
+  width: 100%;
+  margin: 0 auto;
 }

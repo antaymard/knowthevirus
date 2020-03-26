@@ -7,17 +7,18 @@ import Header from './components/header/Header.js';
 
 function App() {
   return (
-    <div className="app-section">
+    <div className="app">
       <Header />
-      <Switch>
-        <Route exact path='/'>
-          <MainPage />
-        </Route>
-        <Route path='/:country'>
-          <h1>Country</h1>
-
-        </Route>
-      </Switch>
+      <div className="app-body">
+        <Switch>
+          <Route exact path='/'>
+            <MainPage />
+          </Route>
+          <Route path='/:country'>
+            <h1>Country</h1>
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }

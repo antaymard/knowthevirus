@@ -1,12 +1,14 @@
 import React from 'react';
-import './header.scss';
+import './header.css';
 
 function Header() {
     return (
         <header>
-            <div>LOGO</div>
-            <input id="country-searchbar" placeholder="Rechercher un pays"></input>
-            <div />
+            <div className="header-section">
+                <div>LOGO</div>
+                <input id="country-searchbar" placeholder="Rechercher un pays"></input>
+                <div />
+            </div>
         </header>
     );
 }

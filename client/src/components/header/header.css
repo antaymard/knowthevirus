@@ -4,20 +4,38 @@ header {
   height: 78px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 }
 
+.header-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: var(--maxWidthDesktop);
+  margin: 0 auto;
+}
+
 input#country-searchbar {
+  outline: none;
   background-color: white;
   border-radius: var(--borderRadius);
   height: 50px;
   background: var(--transparentBackground);
   border: none;
-  min-width: 200px;
+  width: 200px;
   text-align: center;
   color: white;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+  text-transform: uppercase;
 }
 input#country-searchbar::placeholder {
   color: white;
+  opacity: 0.5;
+}
+input#country-searchbar:focus {
+  border: 1px solid white;
+  width: 280px;
 }

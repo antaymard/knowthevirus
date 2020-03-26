@@ -17,8 +17,17 @@ body {
   width: 100vh; */
 }
 
+.card {
+  width: auto;
+  background-color: var(--transparentBackground);
+  border-radius: var(--borderRadius);
+}
+
 /* GLOBAL VARIABLES */
 :root {
   --transparentBackground: rgba(0, 18, 84, 0.3);
   --borderRadius: 15px;
+  --maxWidthDesktop: 1280px;
+  --textColor: #494949;
+  --lightGrey: #f0f0f0;
 }

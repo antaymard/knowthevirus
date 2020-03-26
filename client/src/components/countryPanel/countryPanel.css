@@ -1,0 +1,8 @@
+.country-panel-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.country-panel-body .list-section {
+}
