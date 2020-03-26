@@ -3,7 +3,7 @@ const GitFileDownloader = require('git-file-downloader');
 // Passer en série de promises TODO
 let dowloads = [
     "csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv",
-    "csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv",
+    "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv",
     "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
     "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 ];
