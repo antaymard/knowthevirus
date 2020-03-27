@@ -28,7 +28,7 @@ function MainPage() {
                         </div>
                         <div>
                             Temps
-                                    <button className="mode-button">Relatif</button>
+                            <button className="mode-button">Relatif</button>
                             <button className="mode-button">Normal</button>
                         </div>
                     </div>

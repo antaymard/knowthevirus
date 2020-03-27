@@ -4,11 +4,9 @@ var schedule = require('node-schedule');
 
 // Passer en série de promises TODO
 let dowloads = [
-    "csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv",
     "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv",
     "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-    "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
-    "/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv",
+    "csse_covid_19_datva/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 ];
 
 let downloadPromises = [];
@@ -20,12 +18,10 @@ for (let i in dowloads) {
         branch: 'master',
         file: dowloads[i],
         output: './data'
-    }).run())
+    }).run().catch())
 };
 
-// Run every 3 hours
-schedule.scheduleJob('* * /3 * * *', function (firedDate) {
-    console.log('DL worker has been triggered at %s'.info, firedDate);
+const downlLoadSources = () => {
     Promise.all(downloadPromises).then(() => {
         console.log("All sources have been downloaded at %s".success, new Date());
     }).catch(err => {
@@ -33,4 +29,13 @@ schedule.scheduleJob('* * /3 * * *', function (firedDate) {
         console.log(err);
         console.log('--------------------'.error);
     })
+}
+
+// Download the files on launch
+downlLoadSources();
+
+// Run every 3 hours
+schedule.scheduleJob('* * /3 * * *', function (firedDate) {
+    console.log('DL worker has been triggered at %s'.info, firedDate);
+    downlLoadSources();
 });

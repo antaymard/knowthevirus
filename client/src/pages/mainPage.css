@@ -39,10 +39,9 @@ p {
   color: white;
 }
 
-.mode-button{
-  border:none;
+.mode-button {
   background: var(--transparentBackground);
-	border-radius:6px;
+  border-radius: 6px;
   color: white;
   border: 1px solid white;
   padding: 14px;
