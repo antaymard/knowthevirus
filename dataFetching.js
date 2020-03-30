@@ -1,12 +1,26 @@
 const GitFileDownloader = require('git-file-downloader');
 var schedule = require('node-schedule');
 
+let deathGlobal = [];
+
 
 // Passer en série de promises TODO
 let dowloads = [
-    "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv",
-    "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-    "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+    {
+        name: "recoveredGlobal",
+        fileName: "time_series_covid19_recovered_global.csv",
+        path: "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
+    },
+    {
+        name: 'confirmedGlobal',
+        fileName: "time_series_covid19_confirmed_global.csv",
+        path: "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+    },
+    {
+        name: 'deathGlobal',
+        fileName: "/time_series_covid19_deaths_global.csv",
+        path: "csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+    }
 ];
 
 let downloadPromises = [];
@@ -16,7 +30,7 @@ for (let i in dowloads) {
         provider: 'github',
         repository: 'CSSEGISandData/COVID-19',
         branch: 'master',
-        file: dowloads[i],
+        file: dowloads[i].path,
         output: './data'
     }).run().catch())
 };

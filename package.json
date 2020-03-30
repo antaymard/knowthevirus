@@ -18,6 +18,7 @@
   "homepage": "https://github.com/antaymard/knowthevirus#readme",
   "dependencies": {
     "colors": "^1.4.0",
+    "csvtojson": "^2.0.10",
     "express": "^4.17.1",
     "git-file-downloader": "^1.4.0",
     "node-sass": "^4.13.1",

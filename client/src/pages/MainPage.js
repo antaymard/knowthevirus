@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import CountryPanel from '../components/countryPanel/CountryPanel.js';
+import { XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries } from 'react-vis';
 
 import './mainPage.css'
 
 function MainPage() {
-    return (
 
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/')
+            .then((res) => {
+                setData(res.data)
+            })
+    }, [])
+
+    return (
         <div className='main-page-body'>
             <div className="main-page-section">
                 <div className='left-part'>
@@ -18,8 +29,15 @@ function MainPage() {
             <div className="main-page-section">
                 <div className="left-part">
                     <div className="card" style={{ height: "600px", marginBottom: "20px" }}>
-                        ICI la courbe
-                            </div>
+                        <XYPlot
+                            width={600}
+                            height={500}>
+                            <LineSeries
+                            />
+                            <XAxis title="Date" />
+                            <YAxis title="Nombre de décès" />
+                        </XYPlot>
+                    </div>
                     <div className="card chart-settings-section">
                         <div>
                             Afficher
@@ -44,7 +62,7 @@ function MainPage() {
                 <div className="right-part">
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

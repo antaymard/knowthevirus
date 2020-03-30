@@ -3,6 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 const path = require('path');
 var colors = require('colors');
+const csv = require('csvtojson');
+
 
 // Set colors for console.log()
 colors.setTheme({
@@ -17,6 +19,20 @@ app.use(bodyParser.json());
 
 // Require the script to download the source data
 require("./dataFetching.js");
+var data = require('./dataFetching.js');
+
+// APIs ===============================================================================================
+
+// Get the list of available countries in the data source
+app.get('/api/deaths', (req, res) => {
+    csv()
+        .fromFile('./data/time_series_covid19_deaths_global.csv')
+        .then((jsonObj) => {
+            return res.json(jsonObj.filter(el => el["Country/Region"] == req.query.country))
+        })
+})
+
+// ====================================================================================================
 
 
 // Serving the react app boilerplate
