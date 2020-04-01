@@ -5,3 +5,4 @@ const d1 = new DownloaderHelper('https://covid.ourworldindata.org/data/ecdc/full
 d1.on('end', () => console.log('Download Completed'))
 
 d1.start()
+
