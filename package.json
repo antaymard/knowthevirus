@@ -17,13 +17,21 @@
   },
   "homepage": "https://github.com/antaymard/knowthevirus#readme",
   "dependencies": {
+    "@aternus/csv-to-xlsx": "^1.0.12",
     "colors": "^1.4.0",
+    "connect-flash": "^0.1.1",
     "csvtojson": "^2.0.10",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "fast-csv": "^4.1.3",
     "git-file-downloader": "^1.4.0",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
+    "node-downloader-helper": "^1.0.12",
     "node-sass": "^4.13.1",
     "node-schedule": "^1.3.2",
-    "npx": "^10.2.2"
+    "npx": "^10.2.2",
+    "request": "^2.88.2"
   },
   "proxy": "http://localhost:8080"
 }
