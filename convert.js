@@ -1,30 +1,34 @@
-const mongodb = require("mongodb").MongoClient;
-const csvtojson = require("csvtojson");
+// const csvtojson = require("csvtojson");
+// require('./db/setup.js');
+// var Global = require("./db/global.js");
+
+// var data = [];
+
+// csvtojson()
+//     .fromFile("./data/full_data.csv")
+//     .then(csvData => {
+//         data = csvData;
+//         addToDb(0);
+//     });
 
 
-let url = "mongodb://localhost:27017/";
+// const addToDb = (n) => {
 
-csvtojson()
-    .fromFile("full_data.csv")
-    .then(csvData => {
-        //console.log(csvData);
+//     console.log("%s / %s", n, data.length);
+//     console.log(data[n]);
 
-        mongodb.connect(
-            url,
-            { useNewUrlParser: true, useUnifiedTopology: true },
-            (err, client) => {
-                if (err) throw err;
-
-                client
-                    .db("ktv_db")
-                    .collection("full_data")
-                    .insertMany(csvData, (err, res) => {
-                        if (err) throw err;
-
-                        console.log(`Inserted: ${res.insertedCount} rows`);
-                        client.close();
-                    });
-            }
-        );
-    });
-
+//     let g = new Global({ ...data[n], short_date: data[n].date });
+//     g.save((err, done) => {
+//         if (err) thow(err);
+//         console.log(done)
+//         if (n + 1 <= data.length) {
+//             addToDb(n + 1);
+//         } else {
+//             console.log("Conversion completed %s", n);
+//             console.log("Please check if the following match");
+//             console.log(data[data.length - 1]);
+//             console.log(data[n - 1]);
+//             console.log("============================")
+//         }
+//     });
+// }

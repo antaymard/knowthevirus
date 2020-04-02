@@ -5,12 +5,12 @@ const path = require('path');
 var colors = require('colors');
 const csv = require('csvtojson');
 
-
 // Set colors for console.log()
 colors.setTheme({
     success: 'green',
     error: 'red',
-    info: 'grey'
+    info: 'grey',
+    important: 'yellow'
 });
 
 // json processing boilerplate
@@ -18,19 +18,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Require the script to download the source data
-require("./dataFetching.js");
-var data = require('./dataFetching.js');
+require("./dataFetching-ourworldindata.js");
+
+// Connect to the db
+require('./db/setup.js')
 
 // APIs ===============================================================================================
 
-// Get the list of available countries in the data source
-app.get('/api/deaths', (req, res) => {
-    csv()
-        .fromFile('./data/time_series_covid19_deaths_global.csv')
-        .then((jsonObj) => {
-            return res.json(jsonObj.filter(el => el["Country/Region"] == req.query.country))
-        })
-})
+require('./api.js')(app);
 
 // ====================================================================================================
 
