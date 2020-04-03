@@ -1,10 +1,6 @@
 const GitFileDownloader = require('git-file-downloader');
 var schedule = require('node-schedule');
 
-let deathGlobal = [];
-
-
-// Passer en série de promises TODO
 let dowloads = [
     {
         name: "recoveredGlobal",
