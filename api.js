@@ -12,4 +12,14 @@ module.exports = (app) => {
         })
     })
 
+    // Return auto suggestions for countries
+    app.get('/api/search_countries', (req, res) => {
+        Global.find({ location: { $regex: `.*${req.query.search}.*` } }).distinct('location').exec((err, result) => {
+            if (err) throw (err)
+            console.log(result)
+            res.json(result)
+        })
+    })
+
+
 }
