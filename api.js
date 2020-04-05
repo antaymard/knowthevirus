@@ -14,10 +14,20 @@ module.exports = (app) => {
 
     // Return auto suggestions for countries
     app.get('/api/search_countries', (req, res) => {
+        // TO REGEX
         Global.find({ location: { $regex: `.*${req.query.search}.*` } }).distinct('location').exec((err, result) => {
-            if (err) throw (err)
+            if (err) {
+                console.log("Error api search countries : %s", err);
+                return res.json({
+                    success: false,
+                    error: err
+                })
+            }
             console.log(result)
-            res.json(result)
+            res.json({
+                success: true,
+                data: result
+            })
         })
     })
 

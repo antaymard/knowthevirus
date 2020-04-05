@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import CountryPanel from '../components/countryPanel/CountryPanel.js';
+import CountryPanel from '../components/countryPanel/CountryPanel';
 import { XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries } from 'react-vis';
 
 import './mainPage.css'

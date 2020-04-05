@@ -3,7 +3,7 @@ import './App.css';
 
 import { Switch, Route } from "react-router-dom"
 import MainPage from './pages/MainPage';
-import Header from './components/header/Header.js';
+import Header from './components/header/Header';
 
 function App() {
   return (
