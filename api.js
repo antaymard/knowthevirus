@@ -2,9 +2,11 @@ var Global = require("./db/global.js");
 
 module.exports = (app) => {
 
-    app.get('/api/global_deaths', (req, res) => {
-        Global.find({ location: req.query.location }, (err, results) => {
+    app.post('/api/global_deaths', (req, res) => {
+        console.log(req.body)
+        Global.find({ location: req.body }, (err, results) => {
             if (err) throw err;
+            console.log(results)
             res.status(200).json({
                 success: true,
                 data: results
@@ -23,7 +25,7 @@ module.exports = (app) => {
                     error: err
                 })
             }
-            console.log(result)
+            // console.log(result)
             res.json({
                 success: true,
                 data: result

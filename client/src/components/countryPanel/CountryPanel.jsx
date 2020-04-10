@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 var timer = null;
 
-function CountryPanel() {
+function CountryPanel(props) {
   const [countrySearch, setCountrySearch] = useState("");
   const [countrySuggests, setCountrySuggests] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
@@ -17,6 +17,11 @@ function CountryPanel() {
       setCountrySuggests([]);
     }
   }, [countrySearch]);
+
+  useEffect(() => {
+    console.log("effect fired");
+    props.sendSelectedCountries(selectedCountries);
+  }, [selectedCountries]);
 
   const getSuggestions = (search) => {
     if (search.length > 0) {
@@ -42,7 +47,9 @@ function CountryPanel() {
 
   const addToSelectedCountries = (country) => {
     if (selectedCountries.indexOf(country) < 0) {
-      selectedCountries.push(country);
+      let s = [...selectedCountries];
+      s.push(country);
+      setSelectedCountries(s);
       setCountrySearch("");
     }
   };

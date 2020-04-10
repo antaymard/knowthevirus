@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import queryString from 'query-string';
 import axios from "axios";
 
 import CountryPanel from "../components/countryPanel/CountryPanel";
@@ -16,9 +17,11 @@ function MainPage() {
   //window.addEventListener('resize', reportWindowSize);
 
   const [data, setData] = useState([]);
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/global_deaths?location=France").then((res) => {
+
+    axios.post("/api/global_deaths", selectedCountries).then((res) => {
       const newArr = res.data.data.map((item) => {
         return {
           short_date: item.short_date,
@@ -28,11 +31,15 @@ function MainPage() {
       console.log(newArr);
       setData(newArr);
     });
-  }, []);
+  }, [selectedCountries]);
+
+  const updateSelectedCountries = (countriesArray) => {
+    console.log(countriesArray)
+    setSelectedCountries(countriesArray)
+  }
 
   return (
     <div className="main-page-body">
-      {console.log(data)}
       <div className="main-page-section">
         <div className="left-part">
           <h1>Nombre de décès au COVID-19 (date relative)</h1>
@@ -77,7 +84,7 @@ function MainPage() {
           </div>
         </div>
         <div className="right-part">
-          <CountryPanel />
+          <CountryPanel sendSelectedCountries={updateSelectedCountries} />
         </div>
       </div>
       <div className="main-page-section">
