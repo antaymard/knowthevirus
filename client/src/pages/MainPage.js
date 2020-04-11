@@ -66,7 +66,9 @@ function MainPage() {
               <YAxis />
               {selectedCountries.map((item) => {
                 var json = data.filter(function (a) {
-                  return a.location == item;
+                  if (a.total_deaths > 10) {
+                    return a.location == item;
+                  }
                 });
                 return (
                   <Line
