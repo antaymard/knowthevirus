@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import queryString from 'query-string';
+import queryString from "query-string";
 import axios from "axios";
 
 import CountryPanel from "../components/countryPanel/CountryPanel";
@@ -20,23 +20,22 @@ function MainPage() {
   const [selectedCountries, setSelectedCountries] = useState([]);
 
   useEffect(() => {
-
     axios.post("/api/global_deaths", selectedCountries).then((res) => {
       const newArr = res.data.data.map((item) => {
         return {
           short_date: item.short_date,
           total_deaths: item.total_deaths,
+          location: item.location,
         };
       });
-      console.log(newArr);
       setData(newArr);
     });
   }, [selectedCountries]);
 
   const updateSelectedCountries = (countriesArray) => {
-    console.log(countriesArray)
-    setSelectedCountries(countriesArray)
-  }
+    console.log(countriesArray);
+    setSelectedCountries(countriesArray);
+  };
 
   return (
     <div className="main-page-body">
@@ -63,10 +62,24 @@ function MainPage() {
               data={data}
               margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
             >
-              <Line type="monotone" dataKey="total_deaths" stroke="red" />
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
               <XAxis dataKey="short_date" />
-              <YAxis />
+              <YAxis dataKey="total_deaths" />
+              {selectedCountries.map((item) => {
+                var json = data.filter(function (a) {
+                  return a.location == item;
+                });
+                return (
+                  <>
+                    <Line
+                      type="monotone"
+                      dataKey="total_deaths"
+                      stroke="red"
+                      data={json}
+                    />
+                  </>
+                );
+              })}
+              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
               <Tooltip />
             </LineChart>
           </div>
