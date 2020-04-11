@@ -20,6 +20,7 @@ function CountryPanel(props) {
 
   useEffect(() => {
     console.log("effect fired");
+    addToSelectedCountries("France");
     props.sendSelectedCountries(selectedCountries);
   }, [selectedCountries]);
 

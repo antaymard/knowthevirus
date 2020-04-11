@@ -62,21 +62,19 @@ function MainPage() {
               data={data}
               margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
             >
-              <XAxis dataKey="short_date" />
-              <YAxis dataKey="total_deaths" />
+              <XAxis dataKey="short_date" allowDuplicatedCategory={false} />
+              <YAxis />
               {selectedCountries.map((item) => {
                 var json = data.filter(function (a) {
                   return a.location == item;
                 });
                 return (
-                  <>
-                    <Line
-                      type="monotone"
-                      dataKey="total_deaths"
-                      stroke="red"
-                      data={json}
-                    />
-                  </>
+                  <Line
+                    type="monotone"
+                    dataKey="total_deaths"
+                    stroke="red"
+                    data={json}
+                  />
                 );
               })}
               <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
