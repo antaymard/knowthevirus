@@ -19,9 +19,9 @@ function MainPage() {
   const [data, setData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
   var i = 0;
-
+  var selCountries = selectedCountries.map((item) => item.country);
   useEffect(() => {
-    axios.post("/api/global_deaths", selectedCountries).then((res) => {
+    axios.post("/api/global_deaths", selCountries).then((res) => {
       const newArr = res.data.data.map((item) => {
         return {
           short_date: item.short_date,
@@ -68,9 +68,12 @@ function MainPage() {
               <YAxis />
               {selectedCountries.map((item) => {
                 i = 0;
+                const color = item.color;
+                console.log(selectedCountries);
+                console.log(color);
                 var json = data.filter(function (a) {
                   if (a.total_deaths > 10) {
-                    return a.location == item;
+                    return a.location == item.country;
                   }
                 });
                 json.map((item) => {
@@ -82,7 +85,7 @@ function MainPage() {
                   <Line
                     type="monotone"
                     dataKey="total_deaths"
-                    stroke="red"
+                    stroke={color}
                     data={json}
                   />
                 );

@@ -20,7 +20,6 @@ function CountryPanel(props) {
 
   useEffect(() => {
     console.log("effect fired");
-    addToSelectedCountries("France");
     props.sendSelectedCountries(selectedCountries);
   }, [selectedCountries]);
 
@@ -47,17 +46,22 @@ function CountryPanel(props) {
   };
 
   const addToSelectedCountries = (country) => {
-    if (selectedCountries.indexOf(country) < 0) {
+    if (selectedCountries.filter((el) => el.country === country).length === 0) {
       let s = [...selectedCountries];
-      s.push(country);
+      var randomColor = require("randomcolor");
+      var color = randomColor();
+      s.push({
+        country: country,
+        color: color,
+      });
       setSelectedCountries(s);
       setCountrySearch("");
     }
   };
   const removeFromSelectedCountries = (country) => {
-    if (selectedCountries.indexOf(country) > -1) {
-      setSelectedCountries(selectedCountries.filter((e) => e !== country));
-    }
+    setSelectedCountries(
+      selectedCountries.filter((e) => e.country !== country)
+    );
   };
 
   const renderSuggestions = () => {
@@ -84,7 +88,8 @@ function CountryPanel(props) {
     return selectedCountries.map((item, i) => {
       return (
         <CountryItem
-          country={item}
+          country={item.country}
+          color={item.color}
           key={i}
           remove={removeFromSelectedCountries}
         />

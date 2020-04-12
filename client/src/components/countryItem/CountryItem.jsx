@@ -6,7 +6,7 @@ function CountryItem(props) {
   return (
     <div className="country-item-body">
       <div>
-        <div className="pill" />
+        <div className="pill" style={{ backgroundColor: props.color }} />
         {props.country}
       </div>
       <button onClick={() => props.remove(props.country)}>X</button>
