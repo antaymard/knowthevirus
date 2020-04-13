@@ -5,12 +5,15 @@ import axios from "axios";
 import CountryPanel from "../components/countryPanel/CountryPanel";
 import "./mainPage.css";
 import {
+  AreaChart,
+  ResponsiveContainer,
   LineChart,
   Line,
   CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
 } from "recharts";
 
 function MainPage() {
@@ -58,41 +61,63 @@ function MainPage() {
             className="card"
             style={{ height: "600px", marginBottom: "20px" }}
           >
-            <LineChart
-              width={800}
-              height={600}
-              data={data}
-              margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-            >
-              <XAxis dataKey="date_relative" allowDuplicatedCategory={false} />
-              <YAxis />
-              {selectedCountries.map((item) => {
-                i = 0;
-                const color = item.color;
-                console.log(selectedCountries);
-                console.log(color);
-                var json = data.filter(function (a) {
-                  if (a.total_deaths > 10) {
-                    return a.location == item.country;
-                  }
-                });
-                json.map((item) => {
-                  item.date_relative = i;
-                  i++;
-                });
-                console.log(json);
-                return (
-                  <Line
-                    type="monotone"
-                    dataKey="total_deaths"
-                    stroke={color}
-                    data={json}
-                  />
-                );
-              })}
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-              <Tooltip />
-            </LineChart>
+            <ResponsiveContainer width="90%" height="96%">
+              <LineChart
+                width={800}
+                height={600}
+                data={data}
+                margin={{ top: 5, right: 5, bottom: 5, left: 20 }}
+              >
+                <XAxis
+                  label={{
+                    value: "Relative date",
+                    position: "insideBottom",
+                    offset: -5,
+                  }}
+                  dataKey="date_relative"
+                  allowDuplicatedCategory={false}
+                  stroke="white"
+                />
+                <YAxis
+                  label={{
+                    value: "Total deaths",
+                    angle: -90,
+                    position: "insideLeft",
+                    offset: 0,
+                  }}
+                  stroke="white"
+                />
+                <Legend verticalAlign="top" height={36} />
+                <CartesianGrid stroke="#f5f5f5" />
+                {selectedCountries.map((item) => {
+                  i = 0;
+                  const color = item.color;
+                  console.log(selectedCountries);
+                  console.log(color);
+                  var json = data.filter(function (a) {
+                    if (a.total_deaths > 10) {
+                      return a.location == item.country;
+                    }
+                  });
+                  json.map((item) => {
+                    item.date_relative = i;
+                    i++;
+                  });
+                  console.log(json);
+                  return (
+                    <Line
+                      type="monotone"
+                      dataKey="total_deaths"
+                      stroke={color}
+                      data={json}
+                      name={item.country}
+                    />
+                  );
+                })}
+                <CartesianGrid stroke="#ccc" />
+                <Tooltip />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
           <div className="card chart-settings-section">
             <div>
