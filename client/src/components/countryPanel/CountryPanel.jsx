@@ -52,9 +52,11 @@ function CountryPanel(props) {
   const addToSelectedCountries = (country) => {
     if (selectedCountries.filter((el) => el.country === country).length === 0) {
       let s = [...selectedCountries];
+      var randomColor = require("randomcolor");
+      var color = randomColor();
       s.push({
         country: country,
-        color: generateColor(),
+        color: color,
       });
       setSelectedCountries(s);
       setCountrySearch("");

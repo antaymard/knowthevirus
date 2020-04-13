@@ -18,15 +18,16 @@ function MainPage() {
 
   const [data, setData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
-
+  var i = 0;
+  var selCountries = selectedCountries.map((item) => item.country);
   useEffect(() => {
-    let selCountries = selectedCountries.map((item, i) => item.country)
     axios.post("/api/global_deaths", selCountries).then((res) => {
       const newArr = res.data.data.map((item) => {
         return {
           short_date: item.short_date,
           total_deaths: item.total_deaths,
           location: item.location,
+          date_relative: i,
         };
       });
       setData(newArr);
@@ -63,15 +64,23 @@ function MainPage() {
               data={data}
               margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
             >
-              <XAxis dataKey="short_date" allowDuplicatedCategory={false} />
+              <XAxis dataKey="date_relative" allowDuplicatedCategory={false} />
               <YAxis />
-              {selectedCountries.map((item, i) => {
-                let color = item.color;
+              {selectedCountries.map((item) => {
+                i = 0;
+                const color = item.color;
+                console.log(selectedCountries);
+                console.log(color);
                 var json = data.filter(function (a) {
                   if (a.total_deaths > 10) {
-                    return a.location == item;
+                    return a.location == item.country;
                   }
                 });
+                json.map((item) => {
+                  item.date_relative = i;
+                  i++;
+                });
+                console.log(json);
                 return (
                   <Line
                     type="monotone"
