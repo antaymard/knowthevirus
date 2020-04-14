@@ -5,7 +5,6 @@ import axios from "axios";
 import CountryPanel from "../components/countryPanel/CountryPanel";
 import "./mainPage.css";
 import {
-  AreaChart,
   ResponsiveContainer,
   LineChart,
   Line,
@@ -21,8 +20,10 @@ function MainPage() {
 
   const [data, setData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
+  const [typeTime, setTime] = useState("short_date");
   var i = 0;
   var selCountries = selectedCountries.map((item) => item.country);
+
   useEffect(() => {
     axios.post("/api/global_deaths", selCountries).then((res) => {
       const newArr = res.data.data.map((item) => {
@@ -38,7 +39,6 @@ function MainPage() {
   }, [selectedCountries]);
 
   const updateSelectedCountries = (countriesArray) => {
-    console.log(countriesArray);
     setSelectedCountries(countriesArray);
   };
 
@@ -68,22 +68,23 @@ function MainPage() {
                 data={data}
                 margin={{ top: 5, right: 5, bottom: 5, left: 20 }}
               >
+                <CartesianGrid allowDuplicatedCategory={false} />
                 <XAxis
                   label={{
-                    value: "Relative date",
+                    value: "TIME",
                     position: "insideBottom",
                     offset: -5,
                   }}
-                  dataKey="date_relative"
+                  dataKey={typeTime}
                   allowDuplicatedCategory={false}
                   stroke="white"
                 />
                 <YAxis
                   label={{
-                    value: "Total deaths",
+                    value: "TOTAL DEATHS",
                     angle: -90,
                     position: "insideLeft",
-                    offset: 0,
+                    offset: -5,
                   }}
                   stroke="white"
                 />
@@ -92,8 +93,6 @@ function MainPage() {
                 {selectedCountries.map((item) => {
                   i = 0;
                   const color = item.color;
-                  console.log(selectedCountries);
-                  console.log(color);
                   var json = data.filter(function (a) {
                     if (a.total_deaths > 10) {
                       return a.location == item.country;
@@ -103,7 +102,6 @@ function MainPage() {
                     item.date_relative = i;
                     i++;
                   });
-                  console.log(json);
                   return (
                     <Line
                       type="monotone"
@@ -111,6 +109,9 @@ function MainPage() {
                       stroke={color}
                       data={json}
                       name={item.country}
+                      strokeWidth="3"
+                      dot={false}
+                      strokeOpacity="10"
                     />
                   );
                 })}
@@ -127,8 +128,18 @@ function MainPage() {
             </div>
             <div>
               Temps
-              <button className="mode-button">Relatif</button>
-              <button className="mode-button">Normal</button>
+              <button
+                className="mode-button"
+                onClick={() => setTime("date_relative")}
+              >
+                Relatif
+              </button>
+              <button
+                className="mode-button"
+                onClick={() => setTime("short_date")}
+              >
+                Normal
+              </button>
             </div>
           </div>
         </div>
