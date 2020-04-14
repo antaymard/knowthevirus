@@ -4,6 +4,7 @@ import SearchIcon from "../icons/SearchIcon";
 import "./countryPanel.scss";
 import axios from "axios";
 import { useEffect } from "react";
+import randomColor from "randomcolor";
 
 var timer = null;
 
@@ -52,7 +53,6 @@ function CountryPanel(props) {
   const addToSelectedCountries = (country) => {
     if (selectedCountries.filter((el) => el.country === country).length === 0) {
       let s = [...selectedCountries];
-      var randomColor = require("randomcolor");
       var color = randomColor();
       s.push({
         country: country,

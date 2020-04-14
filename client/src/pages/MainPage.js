@@ -87,6 +87,7 @@ function MainPage() {
                     dataKey="total_deaths"
                     stroke={color}
                     data={json}
+                    strokeWidth={2}
                   />
                 );
               })}
