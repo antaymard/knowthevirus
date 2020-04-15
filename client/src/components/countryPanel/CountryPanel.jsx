@@ -23,6 +23,10 @@ function CountryPanel(props) {
     props.sendSelectedCountries(selectedCountries);
   }, [selectedCountries]);
 
+  useEffect(() => {
+    addToSelectedCountries("France");
+  }, []);
+
   const getSuggestions = (search) => {
     if (search.length > 0) {
       clearTimeout(timer);

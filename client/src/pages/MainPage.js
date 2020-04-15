@@ -20,7 +20,7 @@ function MainPage() {
 
   const [data, setData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
-  const [typeTime, setTime] = useState("short_date");
+  const [time, setTime] = useState("short_date");
   var i = 0;
   var selCountries = selectedCountries.map((item) => item.country);
 
@@ -75,7 +75,7 @@ function MainPage() {
                     position: "insideBottom",
                     offset: -5,
                   }}
-                  dataKey={typeTime}
+                  dataKey={time}
                   allowDuplicatedCategory={false}
                   stroke="white"
                 />
@@ -94,7 +94,9 @@ function MainPage() {
                   i = 0;
                   const color = item.color;
                   var json = data.filter(function (a) {
-                    if (a.total_deaths > 10) {
+                    if (time === "date_relative") {
+                      return a.location == item.country && a.total_deaths > 10;
+                    } else {
                       return a.location == item.country;
                     }
                   });
@@ -129,13 +131,17 @@ function MainPage() {
             <div>
               Temps
               <button
-                className="mode-button"
+                className={
+                  "mode-button" + (time === "date_relative" ? " selected" : "")
+                }
                 onClick={() => setTime("date_relative")}
               >
                 Relatif
               </button>
               <button
-                className="mode-button"
+                className={
+                  "mode-button" + (time === "short_date" ? " selected" : "")
+                }
                 onClick={() => setTime("short_date")}
               >
                 Normal
