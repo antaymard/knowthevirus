@@ -39,3 +39,11 @@ input#country-searchbar:focus {
   border: 1px solid white;
   width: 280px;
 }
+
+.logo {
+  width: 200px;
+  height: 90px;
+  position: absolute;
+  top: -10px;
+  left: 0px;
+}

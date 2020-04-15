@@ -48,12 +48,13 @@ function MainPage() {
     <div className="main-page-body">
       <div className="main-page-section">
         <div className="left-part">
-          <h1>Nombre de décès au COVID-19 (date relative)</h1>
+          <h1>Nombre de décès dus au COVID-19 </h1>
           <p>
             Cette courbe permet de simuler une situation où tous les pays ont
             été contaminés en même temps. Elle permet de comparer l’évolution du
-            virus, en ignorant les décalages de contamination ?? L’axe des dates
-            correspond donc à des dates relatives (x jours après le 10e décès).
+            virus, en compensant les décalages de la contamination entre les
+            pays. L’axe des dates correspond donc à des dates relatives (x jours
+            après le 10e décès).
           </p>
         </div>
       </div>
@@ -70,16 +71,21 @@ function MainPage() {
                 data={data}
                 margin={{ top: 5, right: 5, bottom: 5, left: 20 }}
               >
-                <CartesianGrid allowDuplicatedCategory={false} />
+                <CartesianGrid
+                  allowDuplicatedCategory={false}
+                  vertical={false}
+                />
                 <XAxis
                   label={{
                     value: "TIME",
                     position: "insideBottom",
                     offset: -5,
+                    stroke: "white",
                   }}
                   dataKey={time}
                   allowDuplicatedCategory={false}
                   stroke="white"
+                  minTickGap="5"
                 />
                 <YAxis
                   label={{
@@ -87,11 +93,11 @@ function MainPage() {
                     angle: -90,
                     position: "insideLeft",
                     offset: -5,
+                    stroke: "white",
                   }}
                   stroke="white"
                 />
                 <Legend verticalAlign="top" height={36} />
-                <CartesianGrid stroke="#f5f5f5" />
                 {selectedCountries.map((item) => {
                   i = 0;
                   const color = item.color;
@@ -115,11 +121,10 @@ function MainPage() {
                       name={item.country}
                       strokeWidth="3"
                       dot={false}
-                      strokeOpacity="10"
+                      isAnimationActive={false}
                     />
                   );
                 })}
-                <CartesianGrid stroke="#ccc" />
                 <Tooltip />
               </LineChart>
             </ResponsiveContainer>
