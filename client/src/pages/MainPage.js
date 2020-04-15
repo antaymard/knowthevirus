@@ -21,6 +21,7 @@ function MainPage() {
   const [data, setData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [time, setTime] = useState("short_date");
+  const [dead, setDead] = useState("total_deaths");
   var i = 0;
   var selCountries = selectedCountries.map((item) => item.country);
 
@@ -32,6 +33,7 @@ function MainPage() {
           total_deaths: item.total_deaths,
           location: item.location,
           date_relative: i,
+          new_deaths: item.new_deaths,
         };
       });
       setData(newArr);
@@ -107,7 +109,7 @@ function MainPage() {
                   return (
                     <Line
                       type="monotone"
-                      dataKey="total_deaths"
+                      dataKey={dead}
                       stroke={color}
                       data={json}
                       name={item.country}
@@ -125,8 +127,22 @@ function MainPage() {
           <div className="card chart-settings-section">
             <div>
               Afficher
-              <button className="mode-button">Décès</button>
-              <button className="mode-button">Guérisons</button>
+              <button
+                className={
+                  "mode-button" + (dead === "total_deaths" ? " selected" : "")
+                }
+                onClick={() => setDead("total_deaths")}
+              >
+                Décès totaux
+              </button>
+              <button
+                className={
+                  "mode-button" + (dead === "new_deaths" ? " selected" : "")
+                }
+                onClick={() => setDead("new_deaths")}
+              >
+                Nouveaux décès
+              </button>
             </div>
             <div>
               Temps
