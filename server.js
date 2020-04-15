@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 const path = require('path');
 var colors = require('colors');
 const csv = require('csvtojson');
+const axios = require('axios');
 
 // Set colors for console.log()
 colors.setTheme({
@@ -16,6 +17,13 @@ colors.setTheme({
 // json processing boilerplate
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Make the server auto ping to avoid heroku idle
+function selfPing() {
+    axios.get('https://knowthevirus.herokuapp.com/');
+    console.log("self pinging !");
+}
+setInterval(selfPing, 1000 * 60 * 20);
 
 // Require the script to download the source data
 require("./dataFetching-ourworldindata.js");
