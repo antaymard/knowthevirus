@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "cd client && npm install && npm run build && cd .."
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   "homepage": "https://github.com/antaymard/knowthevirus#readme",
   "dependencies": {
     "@aternus/csv-to-xlsx": "^1.0.12",
+    "axios": "^0.19.2",
     "colors": "^1.4.0",
     "connect-flash": "^0.1.1",
     "csvtojson": "^2.0.10",

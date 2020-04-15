@@ -24,9 +24,9 @@ function CountryPanel(props) {
     props.sendSelectedCountries(selectedCountries);
   }, [selectedCountries]);
 
-  const generateColor = () => {
-    return "#" + Math.floor(Math.random() * 16777215).toString(16);
-  };
+  useEffect(() => {
+    addToSelectedCountries("France");
+  }, []);
 
   const getSuggestions = (search) => {
     if (search.length > 0) {
