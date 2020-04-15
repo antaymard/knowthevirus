@@ -1,8 +1,11 @@
 var mongoose = require('mongoose');
 
 if (process.env.heroku === "yes") {
+    console.log("Getting the config from heroku variables");
     var config = process.env;
+    console.log(config);
 } else {
+    console.log("Getting the config from local file variables");
     var config = require('../config.js');
 }
 
