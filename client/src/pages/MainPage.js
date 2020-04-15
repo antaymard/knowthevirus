@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import queryString from 'query-string';
+import queryString from "query-string";
 import axios from "axios";
 
 import CountryPanel from "../components/countryPanel/CountryPanel";
 import "./mainPage.css";
 import {
+  ResponsiveContainer,
   LineChart,
   Line,
   CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
 } from "recharts";
 
 function MainPage() {
@@ -18,25 +20,27 @@ function MainPage() {
 
   const [data, setData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
+  const [time, setTime] = useState("short_date");
+  var i = 0;
+  var selCountries = selectedCountries.map((item) => item.country);
 
   useEffect(() => {
-
-    axios.post("/api/global_deaths", selectedCountries).then((res) => {
+    axios.post("/api/global_deaths", selCountries).then((res) => {
       const newArr = res.data.data.map((item) => {
         return {
           short_date: item.short_date,
           total_deaths: item.total_deaths,
+          location: item.location,
+          date_relative: i,
         };
       });
-      console.log(newArr);
       setData(newArr);
     });
   }, [selectedCountries]);
 
   const updateSelectedCountries = (countriesArray) => {
-    console.log(countriesArray)
-    setSelectedCountries(countriesArray)
-  }
+    setSelectedCountries(countriesArray);
+  };
 
   return (
     <div className="main-page-body">
@@ -57,18 +61,66 @@ function MainPage() {
             className="card"
             style={{ height: "600px", marginBottom: "20px" }}
           >
-            <LineChart
-              width={800}
-              height={600}
-              data={data}
-              margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-            >
-              <Line type="monotone" dataKey="total_deaths" stroke="red" />
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-              <XAxis dataKey="short_date" />
-              <YAxis />
-              <Tooltip />
-            </LineChart>
+            <ResponsiveContainer width="90%" height="96%">
+              <LineChart
+                width={800}
+                height={600}
+                data={data}
+                margin={{ top: 5, right: 5, bottom: 5, left: 20 }}
+              >
+                <CartesianGrid allowDuplicatedCategory={false} />
+                <XAxis
+                  label={{
+                    value: "TIME",
+                    position: "insideBottom",
+                    offset: -5,
+                  }}
+                  dataKey={time}
+                  allowDuplicatedCategory={false}
+                  stroke="white"
+                />
+                <YAxis
+                  label={{
+                    value: "TOTAL DEATHS",
+                    angle: -90,
+                    position: "insideLeft",
+                    offset: -5,
+                  }}
+                  stroke="white"
+                />
+                <Legend verticalAlign="top" height={36} />
+                <CartesianGrid stroke="#f5f5f5" />
+                {selectedCountries.map((item) => {
+                  i = 0;
+                  const color = item.color;
+                  var json = data.filter(function (a) {
+                    if (time === "date_relative") {
+                      return a.location == item.country && a.total_deaths > 10;
+                    } else {
+                      return a.location == item.country;
+                    }
+                  });
+                  json.map((item) => {
+                    item.date_relative = i;
+                    i++;
+                  });
+                  return (
+                    <Line
+                      type="monotone"
+                      dataKey="total_deaths"
+                      stroke={color}
+                      data={json}
+                      name={item.country}
+                      strokeWidth="3"
+                      dot={false}
+                      strokeOpacity="10"
+                    />
+                  );
+                })}
+                <CartesianGrid stroke="#ccc" />
+                <Tooltip />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
           <div className="card chart-settings-section">
             <div>
@@ -78,8 +130,22 @@ function MainPage() {
             </div>
             <div>
               Temps
-              <button className="mode-button">Relatif</button>
-              <button className="mode-button">Normal</button>
+              <button
+                className={
+                  "mode-button" + (time === "date_relative" ? " selected" : "")
+                }
+                onClick={() => setTime("date_relative")}
+              >
+                Relatif
+              </button>
+              <button
+                className={
+                  "mode-button" + (time === "short_date" ? " selected" : "")
+                }
+                onClick={() => setTime("short_date")}
+              >
+                Normal
+              </button>
             </div>
           </div>
         </div>
