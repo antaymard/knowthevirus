@@ -17,7 +17,12 @@ header {
   margin: 0 auto;
 }
 
+a {
+  color: white;
+}
+
 input#country-searchbar {
+  padding: 0 10px;
   outline: none;
   background-color: white;
   border-radius: var(--borderRadius);
