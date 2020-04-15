@@ -6,7 +6,7 @@ var c;
 var agents = [];
 const radius = 5;
 var contagionRadius = radius;
-const popSize = 600;
+const popSize = 300;
 var currentFrame = 0;
 const ralenti = 2;
 const timeToHeal = 400;
@@ -47,7 +47,7 @@ const SimulationPage = () => {
       var dy = Math.random() - 0.5;
 
       // Initial condition
-      var isSick = Math.random() < 0.01 ? true : false;
+      var isSick = Math.random() < 0.5 ? true : false;
 
       agents.push(new Agent(x, y, dx, dy, isSick));
     }
