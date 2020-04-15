@@ -80,7 +80,7 @@ function MainPage() {
                     value: "TIME",
                     position: "insideBottom",
                     offset: -5,
-                    stroke: "white",
+                    fill: "white",
                   }}
                   dataKey={time}
                   allowDuplicatedCategory={false}
@@ -93,7 +93,7 @@ function MainPage() {
                     angle: -90,
                     position: "insideLeft",
                     offset: -5,
-                    stroke: "white",
+                    fill: "white",
                   }}
                   stroke="white"
                 />
