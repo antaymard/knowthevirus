@@ -6,7 +6,6 @@ module.exports = (app) => {
         console.log(req.body)
         Global.find({ location: req.body }, (err, results) => {
             if (err) throw err;
-            console.log(results)
             res.status(200).json({
                 success: true,
                 data: results

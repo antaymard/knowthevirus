@@ -3,8 +3,9 @@ var app = express();
 var bodyParser = require('body-parser');
 const path = require('path');
 var colors = require('colors');
-const csv = require('csvtojson');
 const axios = require('axios');
+var schedule = require('node-schedule');
+
 
 // Set colors for console.log()
 colors.setTheme({
@@ -26,7 +27,7 @@ function selfPing() {
 setInterval(selfPing, 1000 * 60 * 20);
 
 // Require the script to download the source data
-require("./dataFetching-ourworldindata.js");
+// require("./dataFetching-ourworldindata.js");
 
 // Connect to the db
 require('./db/setup.js')
@@ -36,6 +37,13 @@ require('./db/setup.js')
 require('./api.js')(app);
 
 // ====================================================================================================
+
+// Worker for getting new datas
+schedule.scheduleJob('* * /3 * * *', function (firedDate) {
+    console.log('DL worker has been triggered at %s'.info, firedDate);
+    require('./workers/refreshDatabase.js').run();
+});
+
 
 
 // Serving the react app boilerplate
