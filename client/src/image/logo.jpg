@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="csrf-name" content="csrf5e97688f0eb4b">
+	<meta name="csrf-value" content="43c708865e8628698133d0fbfeafa87d">
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"02e09611df",applicationID:"156179534"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script>	<meta name="cart-hash" content="d751713988987e9331980363e24189ce">
+	<link rel="dns-prefetch" href="https://cdn.vectorstock.com">
+	<link rel="dns-prefetch" href="https://cdn1.vectorstock.com">
+	<link rel="dns-prefetch" href="https://cdn2.vectorstock.com">
+	<link rel="dns-prefetch" href="https://cdn3.vectorstock.com">
+	<link rel="dns-prefetch" href="https://cdn4.vectorstock.com">
+	<link rel="dns-prefetch" href="https://cdn5.vectorstock.com">
+
+	<title>Virus logo design template danger bacteria icon Vector Image</title>
+	<meta name="description" content="Virus logo design template, Danger bacteria vector icon illustration isolated, Icon symbol. Download a Free Preview or High Quality Adobe Illustrator Ai, EPS, PDF and High Resolution JPEG versions..">
+	
+	<meta property="og:site_name" content="VectorStock">
+	<meta property="og:type" content="product">
+	<meta property="og:url" content="https://www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019856">
+	<meta property="og:title" content="Virus logo design template danger bacteria icon vector image on VectorStock">
+	<meta property="og:description" content="Virus logo design template, Danger bacteria vector icon illustration isolated, Icon symbol. Download a Free Preview or High Quality Adobe Illustrator Ai, EPS, PDF and High Resolution JPEG versions.">
+	<meta property="og:image" content="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg">
+	<meta property="og:image:url" content="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg">
+	<meta property="og:image:secure_url" content="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta property="og:image:width" content="1000">
+	<meta property="og:image:height" content="1000">
+	<meta property="og:price:amount" content="0.69">
+	<meta property="og:price:currency" content="USD">
+	<meta property="product:price:amount" content="0.69">
+	<meta property="product:price:currency" content="USD">
+
+	<meta property="fb:app_id" content="241100862642313">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:url" content="https://www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019856">
+	<meta name="twitter:title" content="Virus logo design template danger bacteria icon vector image">
+	<meta name="twitter:description" content="Virus logo design template, Danger bacteria vector icon illustration isolated, Icon symbol">
+	<meta name="twitter:image" content="https://cdn2.vectorstock.com/i/thumb-large/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg">
+	<meta name="twitter:image:width" content="238">
+	<meta name="twitter:image:height" content="250">
+	<meta name="twitter:site" content="@VectorStock">
+
+	<link rel="canonical" href="https://www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019856">
+	<link rel="shortcut icon" href="https://cdn.vectorstock.com/img/icons/favicon.ico" type="image/x-icon">
+
+	<link rel="stylesheet" href="//cdn.vectorstock.com/cache/common1586828842.min.css">
+	<link rel="stylesheet" href="//cdn.vectorstock.com/cache/vector1586828842.min.css">
+	<script src="//cdn.vectorstock.com/cache/common1586853340.min.js"></script>
+	<script src="//cdn.vectorstock.com/cache/vector1586853340.min.js"></script>
+<!-- Analytics --><script type="text/javascript">// Load GA script
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+// Setup
+ga('create', 'UA-2180430-2', 'none');
+ga('require', 'linkid', 'linkid.js');
+ga('send', 'pageview');
+
+</script>
+</head>
+<body>
+
+<!-- Top header -->
+<header>
+	<nav class="top">
+		<figure>
+			<a href="/" title="VectorStock&reg;">VectorStock&reg;</a>
+		</figure>
+
+		<div class="grid">
+			<form id="searchbox"
+				 class="empty">
+				<div class="wrap">
+					<fieldset>
+						<div class="contents">
+							<div class="tags">
+								<ul></ul>
+							</div>
+							<div class="input">
+								<input type="text" name="input" autocomplete="off" autocapitalize="none" spellcheck="true" value="" placeholder="Search…" maxlength="50" autofocus>
+								<button type="button" data-action="clear">×</button>
+							</div>
+
+							<input type="hidden" name="category" value="">
+							<input type="hidden" name="custom_srp" value="">
+							<input type="hidden" name="artist" value="">
+							<input type="hidden" name="similar" value="">
+						</div>
+					</fieldset>
+
+					<button type="submit">
+						<span class="icon">Search</span>
+					</button>
+				</div>
+			</form>
+			<ul>
+					<li><a href="/royalty-free-vectors">All Vectors</a></li>
+					<li><a href="/free-vectors">Free Vectors</a></li>
+				</ul>
+		</div>
+
+		<div class="aside">
+			<ul>
+				<li><a href="/popular-categories" title="Popular Categories">Categories</a></li>
+				<li><a href="/pricing" title="Pricing">Pricing</a></li>
+				<li class="account">
+					<button type="button" data-action="signup">Sign Up</button>
+					<button type="button" data-action="login">Login</button>
+				</li>
+			</ul>
+		</div>
+
+		<div id="mobilenav-icon">
+			<span></span><span></span><span></span><span></span>
+		</div>
+	</nav>
+
+	<!-- Submenu -->
+		<nav id="searchrelated"></nav>	
+
+		<!-- Mobile menu -->
+	<div id="mobilenav-menu">
+		<div>
+			<div class="group">
+				<h4>Browse</h4>
+				<ul>
+					<li><a href="/royalty-free-vectors">All Vectors</a></li>
+					<li><a href="/free-vectors">Free Vectors</a></li>
+				</ul>
+			</div>
+			<div class="group">
+				<h4>Account</h4>
+				<ul>
+					<li class="account">
+							<ul>
+								<li><a href="/signup">Sign Up</a></li>
+								<li data-action="login"><a href="/?login=1">Login…</a></li>
+								<li><a href="/pricing">Pricing</a></li>
+							</ul>
+						</li>
+				</ul>
+				<form method="get" action="/auth/logout" class="logout">
+					<input type="hidden" name="logout" value="1">
+				</form>
+			</div>
+			<div class="group">
+				<h4>Help</h4>
+				<ul>
+					<li><a href="/faq"><abbr title="Frequently Asked Questions">FAQs</abbr></a></li>
+					<li><a href="/contact">Contact Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</header>
+
+		<!-- Account Menu Tabs -->
+		<aside id="nav_sidebar" class="tabs tabsDark">
+
+			<nav>
+				<ul role="tablist">
+					<li data-tab-id="signup" class=""><span role="tab"><span>Sign Up</span></span></li>
+					<li data-tab-id="login" class="selected"><span role="tab"><span>Log In</span></span></li>
+				</ul>
+			</nav>
+
+			<section id="sb_signup" data-tab-id="signup" class="">
+				<div class="primary">
+					<p>New to VectorStock?</p>
+					<p><em>We're the largest royalty-free, vector-only stock agency in the world.</em></p>
+					<p>Every week we add new premium graphics by the thousands.</p>
+				</div>
+				<div class="secondary">
+					<p>Whether you're a global ad&nbsp;agency or a freelance graphic designer, we have the vector graphics to make your project come to life.</p>
+					<p>Buy Vectors, sell Vectors or both. <a href="/signup">Sign up now, it’s free.</a></p>
+				</div>
+				<div class="footer">
+					<button class="master">
+						<span class="title">Sign Up...</span>
+						<span class="value">
+							<span class="symbol signup"></span>
+						</span>
+					</button>
+				</div>
+			</section>
+
+			<section id="sb_login" data-tab-id="login" class="selected">
+				<form action="/auth/login" method="post">
+
+
+					<fieldset class="">
+						<label for="vs_username">Email / Username</label>
+						<div class="textfield">
+							<input type="text" id="vs_username" name="vs_username" value="" autocomplete="on" tabindex="1">
+						</div>
+					</fieldset>
+					<fieldset class="">
+						<label for="vs_password">Password</label>
+						<button type="button" class="forgot">Forgot Password</button>
+						<div class="textfield">
+							<input type="password" id="vs_password" name="vs_password" value="" autocomplete="on" tabindex="2"  maxlength="20">
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="checkbox checked">
+							<label class="selected" for="vs_remember">
+								<span class="title">Stay Logged In</span>
+								<span class="icon"></span>
+								<input type="checkbox" id="vs_remember" name="vs_remember" value="yes" tabindex="3" checked>
+							</label>
+						</div>
+					</fieldset>
+
+
+					<button type="submit" tabindex="4">Log In</button>
+				</form>
+				<div class="alternatives">
+					<h6>Or Login With</h6>
+					<ul>
+						<li class="gp"><a href="/">
+							<span class="title">Google</span>
+							<span class="icon"></span>
+						</a></li>
+						<li class="fb"><a href="/">
+							<span class="title">Facebook</span>
+							<span class="icon"></span>
+						</a></li>
+					</ul>
+				</div>
+
+				
+			</section>
+		</aside>
+
+	<!-- Page -->
+	<article>
+		<section id="vs-asset">
+
+			<!-- Aside -->
+			<div class="aside">
+				<ol itemscope itemtype="http://schema.org/BreadcrumbList">
+					<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+						<a itemtype="http://schema.org/Thing" itemprop="item" href="/royalty-free-vectors">
+							<span itemprop="name">Royalty Free Vectors</span>
+						</a>
+						<meta itemprop="position" content="1" />
+					</li>
+					<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+						<a itemtype="http://schema.org/Thing" itemprop="item" href="/royalty-free-vectors/bacteria-vectors">
+							<span itemprop="name">Bacteria Vectors</span>
+						</a>
+						<meta itemprop="position" content="2" />
+					</li>
+				</ol>
+
+				<h1>
+					Virus logo design template danger bacteria icon vector&nbsp;image														</h1>
+
+				<figure style="padding-top: 99%;" class="target">
+					<div class="highres" data-src="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg">
+						<noscript><img src="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg" title="Virus logo design template danger bacteria icon vector image" alt="Virus logo design template danger bacteria icon"></noscript>
+					</div>
+					<div class="lowres">
+						<img src="https://cdn2.vectorstock.com/i/thumbs/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg" title="Virus logo design template danger bacteria icon vector image" alt="Virus logo design template danger bacteria icon">
+					</div>
+					<div class="overlay"></div>
+				</figure>
+
+				<form data-loggedin="0" data-licenses="2" data-license="standard" data-status="" data-payments="3" data-payment="single-image">
+					<input type="hidden" id="vector_id" value="30019856">
+					<input type="hidden" id="vector_title" value="Virus logo design template danger bacteria icon">
+					<input type="hidden" id="vector_description" value="Virus logo design template, Danger bacteria vector icon illustration isolated, Icon symbol. Download a Free Preview or High Quality Adobe Illustrator Ai, EPS, PDF and High Resolution JPEG versions.">
+					<input type="hidden" id="vector_url" value="https://www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019856">
+					<input type="hidden" id="vector_media" value="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg">
+					<input type="hidden" id="vector_ratio" value="1">
+					<input type="hidden" id="vector_license_status" value="">
+					<input type="hidden" id="artist_name" value="shuttersport">
+					<input type="hidden" id="account_user" value="0">
+
+					<div class="options">
+						<!--
+						-- OPTION: License type
+						-->
+						<div class="option" data-type="license" data-license="standard" data-licenses="2">
+							<h6><span class="type">License</span><a href="/faq/members/standard-license">Learn More</a></h6>
+							<div class="optgroup radgroup">
+								<fieldset>
+									<label for="f_license_standard" class="checked">
+										<input type="radio" id="f_license_standard" name="license" value="standard" checked="checked" tabindex="2">
+										<span class="label">Standard</span>
+										<span class="descr">For Print, Advertising, Design</span>
+									</label>
+								</fieldset>
+								<fieldset>
+									<label for="f_license_expanded">
+										<input type="radio" id="f_license_expanded" name="license" value="expanded" tabindex="4">
+										<span class="label">Expanded</span>
+										<span class="descr">For Resale &amp; Reproduction</span>
+									</label>
+								</fieldset>
+							</div>
+
+							<div class="help">
+								<p>The license type determines how you can use this image.</p>
+								<table>
+									<thead>
+										<tr>
+											<th></th>
+																						<th data-license="standard">Std.</th>																						<th data-license="expanded">Exp.</th>										</tr>
+									</thead>
+									<tbody>
+																				<tr>
+											<td>Print / Editorial</td>
+																						<td data-license="standard"><span class="yes"></span></td>
+											<td data-license="expanded"><span class="yes"></span></td>										</tr>
+										<tr>
+											<td>Graphic Design</td>
+																						<td data-license="standard"><span class="yes"></span></td>
+											<td data-license="expanded"><span class="yes"></span></td>										</tr>
+										<tr>
+											<td>Web Design</td>
+																						<td data-license="standard"><span class="yes"></span></td>
+											<td data-license="expanded"><span class="yes"></span></td>										</tr>
+										<tr>
+											<td>Social Media</td>
+																						<td data-license="standard"><span class="yes"></span></td>
+											<td data-license="expanded"><span class="yes"></span></td>										</tr>
+										<tr>
+											<td>Edit &amp; Modify</td>
+																						<td data-license="standard"><span class="yes"></span></td>
+											<td data-license="expanded"><span class="yes"></span></td>										</tr>
+										<tr>
+											<td>Multi-user</td>
+																						<td data-license="standard"><span class="no"></span></td>
+											<td data-license="expanded"><span class="yes"></span></td>										</tr>
+										<tr>
+											<td>Resale Items</td>
+																						<td data-license="standard"><span class="no"></span></td>
+											<td data-license="expanded"><span class="yes"></span></td>										</tr>
+										<tr>
+											<td>Unlimited Runs</td>
+																						<td data-license="standard"><span class="no"></span></td>
+											<td data-license="expanded"><span class="yes"></span></td>										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<!--
+						-- OPTION: Payment options (Standard)
+						-->
+						<div class="option" data-type="payment" data-license="standard">
+							<h6><span class="type">Ways to Buy</span><a href="/pricing">Compare</a></h6>
+							<div class="optgroup radgroup" data-license="standard">
+																<fieldset>
+									<label for="f_payment_standard_single-image" class="checked" >
+										<input type="radio" id="f_payment_standard_single-image" name="payment_standard" data-cost="14.99" value="single-image"  checked="checked" tabindex="5">
+										<span class="label">Pay-per-Image</span>
+										<span class="value"><small>$</small><var>14.99</var></span>
+									</label>
+								</fieldset>
+																<fieldset>
+									<label for="f_payment_standard_credits">
+										<input type="radio" id="f_payment_standard_credits" name="payment_standard" data-cost="1" value="credits" tabindex="6">
+										<span class="label">Credits</span>
+										<span class="value"><small>$</small><var>1.00</var></span>
+									</label>
+								</fieldset>
+								<fieldset>
+									<label for="f_payment_standard_subscription">
+										<input type="radio" id="f_payment_standard_subscription" name="payment_standard" data-cost="1" value="subscription" tabindex="7">
+										<span class="label">Subscription</span>
+										<span class="value"><small>$</small><var>0.69</var></span>
+									</label>
+								</fieldset>
+							</div>
+							<div class="help">
+								<p>There are three ways to pay for Standard licenses. Prices are $<abbr title="United States Dollars">US</abbr>.</p>
+
+								<table>
+									<thead>
+										<tr>
+											<th>Pay with</th>
+											<th>Image Price</th>
+										</tr>
+									</thead>
+									<tbody>
+																				<tr>
+											<td colspan="2">
+												<span class="title">
+													<span class="dt">Pay-per-Image</span>
+													<span class="dm"></span>
+													<span class="dd"><small>$</small>14.99</span>
+												</span>
+												<span class="byline">One-time payment</span>
+											</td>
+										</tr>
+																				<tr>
+											<td colspan="2">
+												<span class="title">
+													<span class="dt">Pre-paid Credits</span>
+													<span class="dm"></span>
+													<span class="dd"><small>$</small>1</span>
+												</span>
+												<span class="byline">Download images on-demand (1 credit = $1). Minimum purchase of 30.</span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span class="title">
+													<span class="dt">Subscription Plan</span>
+													<span class="dm"></span>
+													<span class="dd"><em>From</em> 69c</span>
+												</span>
+												<span class="byline">Choose a monthly plan. Unused downloads automatically roll into following month.</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!--
+						-- OPTION: Payment options (Expanded)
+						-->
+						<div class="option" data-type="payment" data-license="expanded">
+							<h6><span class="type">Ways to Buy</span><a href="/faq/members/ways-to-buy">Compare</a></h6>
+							<div class="optgroup radgroup" data-license="expanded">
+																<fieldset>
+									<label for="f_payment_expanded_single-image" class="checked">
+										<input type="radio" id="f_payment_expanded_single-image" name="payment_expanded" data-cost="29.99" value="single-image" checked="checked" tabindex="8">
+										<span class="label">Pay-per-Image</span>
+										<span class="value"><small>$</small><var>29.99</var></span>
+									</label>
+								</fieldset>
+																<fieldset>
+									<label for="f_payment_expanded_credits">
+										<input type="radio" id="f_payment_expanded_credits" name="payment_expanded" data-cost="30" value="credits" tabindex="9">
+										<span class="label">Credits</span>
+										<span class="value"><small>$</small><var>30.00</var></span>
+									</label>
+								</fieldset>
+							</div>
+														<div class="help">
+								<p>There are two ways to pay for Expanded licenses. Prices are $<abbr title="United States Dollars">US</abbr>.</p>
+
+								<table>
+									<thead>
+										<tr>
+											<th>Pay with</th>
+											<th>Cost per Image</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td colspan="2">
+												<span class="title">
+													<span class="dt">Pay-per-Image</span>
+													<span class="dm"></span>
+													<span class="dd"><small>$</small>29.99</span>
+												</span>
+												<span class="byline">One-off payment, no signup needed.</span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span class="title">
+													<span class="dt">Pre-paid Credits</span>
+													<span class="dm"></span>
+													<span class="dd"><small>$</small>30</span>
+												</span>
+												<span class="byline">Download images on-demand (1 credit = $1).</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+													</div>
+						<!--
+						-- OPTION: Customization
+						-->
+						<div class="option" data-type="customization">
+							<h6><span class="type">New Option!</span><a href="/faq/members/what-is-hire-a-designer">What is this?</a></h6>
+							<div class="optgroup chkgroup">
+								<fieldset>
+									<label for="f_payment_customization" class="checked_">
+										<input type="checkbox" id="f_payment_customization" name="payment_customization" data-cost="84" value="customization" tabindex="12">
+										<span class="label">Customize image</span>
+										<span class="value"><small>$</small><var>84.00</var></span>
+									</label>
+								</fieldset>
+							</div>
+							<div class="help">
+								<p>Love the image but just need a few modifications? Let our talented artists do the work for you!</p>
+								<p>We'll connect you with a designer who can make updates and send you the artwork in a format of your choice.</p>
+								<h4>Examples</h4>
+								<ul>
+									<li>Change the text</li>
+									<li>Modify colors</li>
+									<li>Resize to new dimensions</li>
+									<li>Include logo or symbol</li>
+									<li>Add your company or business name</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="download">
+						<button type="button" data-action="download">
+							<span class="label">Download Image</span>
+							<span class="icon"></span>
+						</button>
+						<h6><span class="label">Files Included</span></h6>
+						<div class="help">
+							<span class="loading"><span class="label">Loading Details...</span></span>
+						</div>
+					</div>
+					<div class="download_options">
+						<div class="wrap">
+							<div class="optgroup" data-action="download">
+								<span class="header">Download File/s:</span>
+								<div class="dropdown" data-value="zip">
+									<div class="display">
+										<span class="label"><strong>ZIP Archive</strong></span>
+										<span class="icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path d="M10.6,12.8 15,17.2 19.4,12.8"/></svg></span>
+									</div>
+									<div class="select">
+										<select>
+											<optgroup label="All Files">
+												<option value="zip" data-label="ZIP Archive" data-details="" data-url="" selected="selected">ZIP Archive</option>											</optgroup>
+											<optgroup label="Image">
+												<option value="jpg" data-label="High-res JPG" data-details="300 DPI+" data-url="">High-res JPG (300 DPI+)</option>												<option value="png" data-label="High-res PNG" data-details="300 DPI+" data-url="">High-res PNG (300 DPI+)</option>											</optgroup>
+											<optgroup label="Vector">
+												<option value="ai" data-label="Adobe Illustrator" data-details="v10+" data-url="">Adobe Illustrator (v10+)</option>												<option value="eps" data-label="Vector EPS" data-details="v8+" data-url="">Vector EPS (v8+)</option>												<option value="pdf" data-label="Vector PDF" data-details="" data-url="">Vector PDF</option>											</optgroup>
+										</select>
+									</div>
+								</div>
+								<button type="button" data-action="download_file">
+									<span class="label">Download ZIP</span>
+									<span class="icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path d="M23.6,21.2 23.6,9.5 16.4,9.5 16.4,21.3 10.8,21.3 11,21.5 20,30.5 29.2,21.3"/></svg></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- Image -->
+			<div class="image">
+				<figure data-orientation="square" style="padding-top: 99%;" class="target">
+					<div class="highres" data-src="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg">
+						<noscript><img src="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg" title="Virus logo design template danger bacteria icon vector image" alt="Virus logo design template danger bacteria icon"></noscript>
+					</div>
+					<div class="lowres">
+						<img src="https://cdn2.vectorstock.com/i/thumbs/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg" title="Virus logo design template danger bacteria icon vector image" alt="Virus logo design template danger bacteria icon">
+					</div>
+					<div class="overlay"></div>
+					<div class="panels">
+						<div class="share">
+							<h4>Share on</h4>
+							<ul>
+								<li class="pinterest"><button type="button" data-action="pinterest"><span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" focusable="false" role="img"><path d="M12.5,0C5.6,0,0,5.6,0,12.5c0,5.12,3.08,9.52,7.48,11.45c-0.03-0.87-0.01-1.92,0.22-2.87c0.24-1.01,1.61-6.81,1.61-6.81s-0.4-0.8-0.4-1.98c0-1.85,1.07-3.24,2.41-3.24c1.14,0,1.69,0.85,1.69,1.88c0,1.14-0.73,2.85-1.1,4.44c-0.31,1.33,0.67,2.41,1.97,2.41c2.37,0,3.96-3.04,3.96-6.65c0-2.74-1.85-4.79-5.2-4.79c-3.79,0-6.15,2.83-6.15,5.99c0,1.09,0.32,1.86,0.82,2.45c0.23,0.27,0.26,0.38,0.18,0.7c-0.06,0.23-0.2,0.78-0.25,1c-0.08,0.32-0.34,0.43-0.63,0.31c-1.75-0.71-2.56-2.62-2.56-4.77c0-3.55,3-7.81,8.93-7.81c4.77,0,7.91,3.45,7.91,7.16c0,4.9-2.73,8.57-6.75,8.57c-1.35,0-2.62-0.73-3.05-1.56c0,0-0.73,2.88-0.88,3.44c-0.27,0.96-0.78,1.93-1.26,2.68C10.08,24.82,11.27,25,12.5,25C19.4,25,25,19.4,25,12.5S19.4,0,12.5,0L12.5,0z"/></svg></span><span class="label">Pinterest</span></span></button></li>
+								<li class="facebook"><button type="button" data-action="facebook"><span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" focusable="false" role="img"><path d="M22.44,1H2.56C1.7,1,1,1.7,1,2.56v19.88C1,23.3,1.7,24,2.56,24h10.41v-8.89H9.98v-3.46h2.99V9.1c0-2.96,1.81-4.58,4.45-4.58c1.27,0,2.35,0.09,2.67,0.14v3.1l-1.83,0c-1.44,0-1.72,0.68-1.72,1.69v2.21h3.43l-0.45,3.46h-2.98V24h5.89C23.3,24,24,23.3,24,22.44V2.56C24,1.7,23.3,1,22.44,1z"/></svg></span><span class="label">Facebook</span></span></button></li>
+								<li class="twitter"><button type="button" data-action="twitter"><span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" focusable="false" role="img"><path d="M7.86,22.5c9.43,0,14.59-7.69,14.59-14.37c0-0.22,0-0.44-0.01-0.65c1-0.71,1.87-1.6,2.56-2.61c-0.92,0.4-1.91,0.67-2.95,0.79c1.06-0.62,1.87-1.61,2.26-2.79c-0.99,0.58-2.09,1-3.26,1.23c-0.94-0.98-2.27-1.6-3.74-1.6c-2.83,0-5.13,2.26-5.13,5.05c0,0.4,0.05,0.78,0.13,1.15C8.05,8.49,4.27,6.48,1.74,3.42C1.3,4.17,1.05,5.04,1.05,5.96c0,1.75,0.91,3.3,2.28,4.2C2.49,10.14,1.7,9.91,1,9.53C1,9.55,1,9.58,1,9.6c0,2.45,1.77,4.49,4.11,4.95c-0.43,0.12-0.88,0.18-1.35,0.18c-0.33,0-0.65-0.03-0.96-0.09c0.65,2.01,2.55,3.47,4.79,3.51C5.84,19.5,3.63,20.3,1.22,20.3c-0.41,0-0.82-0.02-1.22-0.07C2.27,21.66,4.97,22.5,7.86,22.5"/></svg></span><span class="label">Twitter</span></span></button></li>
+							</ul>
+						</div>
+						<div class="composite">
+							<button type="button" data-action="download"><span><span class="label">Download JPG Preview Image</span></span></button>
+						</div>
+					</div>
+				</figure>
+				<div class="details">
+					<div class="meta">
+						<ul>
+							<li class="meta-id">
+								<dl><dt>Image ID</dt><dd>30019856</dd></dl>
+							</li>
+							<li class="meta-artist">
+								<dl>
+									<dt>Artist</dt>
+									<dd><a href="/royalty-free-vectors/vectors-by_shuttersport" rel="nofollow">shuttersport</a><button type="button" data-action="follow" title="Follow Artists that you like to create a newsfeed of their recent images."><span class="label">Follow</span></button></dd>
+								</dl>
+							</li>
+						</ul>
+					</div>
+					<div class="options" data-total="2">
+						<ul>
+							<li class="opt-like">
+								<button type="button" data-action="like" data-count="0"><span class="icon">&hearts;</span><span class="label">Like</span><span class="tally"></span></button>
+							</li>
+							<li class="opt-cart">
+								<button type="button" data-action="cart"><span class="icon">+</span><span class="label">Cart</span></button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Metadata -->
+			<div class="metadata">
+				<div itemtype="http://schema.org/Product" itemscope>
+					<meta itemprop="sku" content="30019856">
+					<meta itemprop="productID" content="30019856">
+					<meta itemprop="name" content="Virus logo design template danger bacteria icon">
+					<meta itemprop="description" content="Virus logo design template, Danger bacteria vector icon illustration isolated, Icon symbol. Download a Free Preview or High Quality Adobe Illustrator Ai, EPS, PDF and High Resolution JPEG versions.">
+					<meta itemprop="releaseDate" content="2020-03-09">
+					<link itemprop="image" href="https://cdn2.vectorstock.com/i/1000x1000/98/56/virus-logo-design-template-danger-bacteria-icon-vector-30019856.jpg">
+					
+					<div itemprop="brand" itemtype="http://schema.org/Thing" itemscope>
+						<meta itemprop="name" content="VectorStock">
+					</div>
+					<div itemprop="offers" itemtype="http://schema.org/Offer" itemscope>
+						<link itemprop="url" href="https://www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019856">
+						<meta itemprop="availability" content="https://schema.org/InStock">
+						<div itemprop="price">0.69</div>
+						<div itemprop="priceCurrency">USD</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<section id="vs-related">
+			<div id="group-similar" class="group">
+				<h6><span class="icon"></span><strong>Similar Images</strong></h6>
+
+				<div class="gallery large">
+					<ul>
+						<li data-src="https://cdn4.vectorstock.com/i/thumb-large/44/18/biohazard-symbol-sign-biological-threat-alert-vector-29614418.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biohazard-symbol-sign-biological-threat-alert-vector-29614418" title="biohazard symbol sign biological threat alert vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumb-large/44/18/biohazard-symbol-sign-biological-threat-alert-vector-29614418.jpg" title="biohazard symbol sign biological threat alert" alt="biohazard symbol sign biological threat alert vector image"></noscript></a></li>
+						<li data-src="https://cdn2.vectorstock.com/i/thumb-large/99/51/virus-attention-sign-set-coronavirus-icons-vector-30489951.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-attention-sign-set-coronavirus-icons-vector-30489951" title="virus attention sign set coronavirus icons vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumb-large/99/51/virus-attention-sign-set-coronavirus-icons-vector-30489951.jpg" title="virus attention sign set coronavirus icons" alt="virus attention sign set coronavirus icons vector image"></noscript></a></li>
+						<li data-src="https://cdn1.vectorstock.com/i/thumb-large/38/60/bacteria-coronavirus-in-grunge-style-design-vector-30223860.jpg"><a href="//www.vectorstock.com/royalty-free-vector/bacteria-coronavirus-in-grunge-style-design-vector-30223860" title="bacteria coronavirus in grunge style design vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumb-large/38/60/bacteria-coronavirus-in-grunge-style-design-vector-30223860.jpg" title="bacteria coronavirus in grunge style design" alt="bacteria coronavirus in grunge style design vector image"></noscript></a></li>
+						<li data-src="https://cdn5.vectorstock.com/i/thumb-large/16/59/stop-virus-prohibition-sign-infection-protect-vector-30271659.jpg"><a href="//www.vectorstock.com/royalty-free-vector/stop-virus-prohibition-sign-infection-protect-vector-30271659" title="stop virus prohibition sign infection protect vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumb-large/16/59/stop-virus-prohibition-sign-infection-protect-vector-30271659.jpg" title="stop virus prohibition sign infection protect" alt="stop virus prohibition sign infection protect vector image"></noscript></a></li>
+						<li data-src="https://cdn4.vectorstock.com/i/thumb-large/47/53/coronavirus-icon-with-prohibit-sign-on-white-vector-30264753.jpg"><a href="//www.vectorstock.com/royalty-free-vector/coronavirus-icon-with-prohibit-sign-on-white-vector-30264753" title="coronavirus icon with prohibit sign on white vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumb-large/47/53/coronavirus-icon-with-prohibit-sign-on-white-vector-30264753.jpg" title="coronavirus icon with prohibit sign on white" alt="coronavirus icon with prohibit sign on white vector image"></noscript></a></li>
+						<li data-src="https://cdn2.vectorstock.com/i/thumb-large/35/51/the-epidemic-coronavirus-covind-19-2019-ncov-vector-30333551.jpg"><a href="//www.vectorstock.com/royalty-free-vector/the-epidemic-coronavirus-covind-19-2019-ncov-vector-30333551" title="the epidemic coronavirus covind-19 2019-ncov vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumb-large/35/51/the-epidemic-coronavirus-covind-19-2019-ncov-vector-30333551.jpg" title="the epidemic coronavirus covind-19 2019-ncov" alt="the epidemic coronavirus covind-19 2019-ncov vector image"></noscript></a></li>
+						<li data-src="https://cdn3.vectorstock.com/i/thumb-large/54/72/kill-virus-bacteria-icon-editable-line-vector-30415472.jpg"><a href="//www.vectorstock.com/royalty-free-vector/kill-virus-bacteria-icon-editable-line-vector-30415472" title="kill virus bacteria icon editable line vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumb-large/54/72/kill-virus-bacteria-icon-editable-line-vector-30415472.jpg" title="kill virus bacteria icon editable line" alt="kill virus bacteria icon editable line vector image"></noscript></a></li>
+						<li data-src="https://cdn3.vectorstock.com/i/thumb-large/58/97/biohazard-symbol-icon-vector-28775897.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biohazard-symbol-icon-vector-28775897" title="biohazard symbol icon vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumb-large/58/97/biohazard-symbol-icon-vector-28775897.jpg" title="biohazard symbol icon" alt="biohazard symbol icon vector image"></noscript></a></li>
+						<li data-src="https://cdn1.vectorstock.com/i/thumb-large/33/40/dangerous-coronavirus-bacteria-mushroom-icon-vector-30223340.jpg"><a href="//www.vectorstock.com/royalty-free-vector/dangerous-coronavirus-bacteria-mushroom-icon-vector-30223340" title="dangerous coronavirus bacteria mushroom icon vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumb-large/33/40/dangerous-coronavirus-bacteria-mushroom-icon-vector-30223340.jpg" title="dangerous coronavirus bacteria mushroom icon" alt="dangerous coronavirus bacteria mushroom icon vector image"></noscript></a></li>
+						<li data-src="https://cdn1.vectorstock.com/i/thumb-large/03/95/biohazard-dangerous-sign-on-bloody-background-vector-23830395.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biohazard-dangerous-sign-on-bloody-background-vector-23830395" title="biohazard dangerous sign on bloody background vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumb-large/03/95/biohazard-dangerous-sign-on-bloody-background-vector-23830395.jpg" title="biohazard dangerous sign on bloody background" alt="biohazard dangerous sign on bloody background vector image"></noscript></a></li>
+						<li data-src="https://cdn4.vectorstock.com/i/thumb-large/03/88/biohazard-sign-vector-29970388.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biohazard-sign-vector-29970388" title="biohazard sign vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumb-large/03/88/biohazard-sign-vector-29970388.jpg" title="biohazard sign" alt="biohazard sign vector image"></noscript></a></li>
+						<li data-src="https://cdn3.vectorstock.com/i/thumb-large/96/22/sign-icon-bacteria-coronavirus-influenza-pathogen-vector-29579622.jpg"><a href="//www.vectorstock.com/royalty-free-vector/sign-icon-bacteria-coronavirus-influenza-pathogen-vector-29579622" title="sign icon bacteria coronavirus influenza pathogen vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumb-large/96/22/sign-icon-bacteria-coronavirus-influenza-pathogen-vector-29579622.jpg" title="sign icon bacteria coronavirus influenza pathogen" alt="sign icon bacteria coronavirus influenza pathogen vector image"></noscript></a></li>
+						<li data-src="https://cdn5.vectorstock.com/i/thumb-large/14/34/coronavirus-caution-badge-covid-2019-safety-vector-30241434.jpg"><a href="//www.vectorstock.com/royalty-free-vector/coronavirus-caution-badge-covid-2019-safety-vector-30241434" title="coronavirus caution badge covid-2019 safety vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumb-large/14/34/coronavirus-caution-badge-covid-2019-safety-vector-30241434.jpg" title="coronavirus caution badge covid-2019 safety" alt="coronavirus caution badge covid-2019 safety vector image"></noscript></a></li>
+						<li data-src="https://cdn2.vectorstock.com/i/thumb-large/02/66/biological-hazard-related-glyph-icon-vector-30490266.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biological-hazard-related-glyph-icon-vector-30490266" title="biological hazard related glyph icon vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumb-large/02/66/biological-hazard-related-glyph-icon-vector-30490266.jpg" title="biological hazard related glyph icon" alt="biological hazard related glyph icon vector image"></noscript></a></li>
+						<li data-src="https://cdn5.vectorstock.com/i/thumb-large/05/69/organism-icons-set-cartoon-style-vector-13840569.jpg"><a href="//www.vectorstock.com/royalty-free-vector/organism-icons-set-cartoon-style-vector-13840569" title="organism icons set cartoon style vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumb-large/05/69/organism-icons-set-cartoon-style-vector-13840569.jpg" title="organism icons set cartoon style" alt="organism icons set cartoon style vector image"></noscript></a></li>
+						<li data-src="https://cdn4.vectorstock.com/i/thumb-large/28/68/toxic-icon-radiation-pictogram-biohazard-vector-23762868.jpg"><a href="//www.vectorstock.com/royalty-free-vector/toxic-icon-radiation-pictogram-biohazard-vector-23762868" title="toxic icon radiation pictogram biohazard vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumb-large/28/68/toxic-icon-radiation-pictogram-biohazard-vector-23762868.jpg" title="toxic icon radiation pictogram biohazard" alt="toxic icon radiation pictogram biohazard vector image"></noscript></a></li>
+						<li data-src="https://cdn3.vectorstock.com/i/thumb-large/47/37/red-sign-stop-coronavirus-isolated-on-white-vector-30244737.jpg"><a href="//www.vectorstock.com/royalty-free-vector/red-sign-stop-coronavirus-isolated-on-white-vector-30244737" title="red sign stop coronavirus isolated on white vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumb-large/47/37/red-sign-stop-coronavirus-isolated-on-white-vector-30244737.jpg" title="red sign stop coronavirus isolated on white" alt="red sign stop coronavirus isolated on white vector image"></noscript></a></li>
+						<li data-src="https://cdn1.vectorstock.com/i/thumb-large/87/00/coronavirus-icon-set-vector-30278700.jpg"><a href="//www.vectorstock.com/royalty-free-vector/coronavirus-icon-set-vector-30278700" title="coronavirus icon set vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumb-large/87/00/coronavirus-icon-set-vector-30278700.jpg" title="coronavirus icon set" alt="coronavirus icon set vector image"></noscript></a></li>
+						<li data-src="https://cdn1.vectorstock.com/i/thumb-large/62/15/virus-stop-sign-vector-29476215.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-stop-sign-vector-29476215" title="virus stop sign vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumb-large/62/15/virus-stop-sign-vector-29476215.jpg" title="virus stop sign" alt="virus stop sign vector image"></noscript></a></li>
+						<li data-src="https://cdn4.vectorstock.com/i/thumb-large/29/58/abstract-virus-strain-model-novel-coronavirus-2019-vector-29462958.jpg"><a href="//www.vectorstock.com/royalty-free-vector/abstract-virus-strain-model-novel-coronavirus-2019-vector-29462958" title="abstract virus strain model novel coronavirus 2019 vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumb-large/29/58/abstract-virus-strain-model-novel-coronavirus-2019-vector-29462958.jpg" title="abstract virus strain model novel coronavirus 2019" alt="abstract virus strain model novel coronavirus 2019 vector image"></noscript></a></li>
+					</ul>
+				</div>
+				<div class="gallery small more">
+					<ul>
+						<li data-id="30270999" data-title="coronavirus icon set" data-src="https://cdn5.vectorstock.com/i/thumbs/09/99/coronavirus-icon-set-vector-30270999.jpg"><a href="//www.vectorstock.com/royalty-free-vector/coronavirus-icon-set-vector-30270999" title="coronavirus icon set vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/09/99/coronavirus-icon-set-vector-30270999.jpg" title="coronavirus icon set" alt="coronavirus icon set vector image"></noscript></a></li>
+						<li data-id="30498750" data-title="viral infection virus protection plasticine art" data-src="https://cdn1.vectorstock.com/i/thumbs/87/50/viral-infection-virus-protection-plasticine-art-vector-30498750.jpg"><a href="//www.vectorstock.com/royalty-free-vector/viral-infection-virus-protection-plasticine-art-vector-30498750" title="viral infection virus protection plasticine art vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumbs/87/50/viral-infection-virus-protection-plasticine-art-vector-30498750.jpg" title="viral infection virus protection plasticine art" alt="viral infection virus protection plasticine art vector image"></noscript></a></li>
+						<li data-id="30228572" data-title="stop corona virus infection medicine warning" data-src="https://cdn3.vectorstock.com/i/thumbs/85/72/stop-corona-virus-infection-medicine-warning-vector-30228572.jpg"><a href="//www.vectorstock.com/royalty-free-vector/stop-corona-virus-infection-medicine-warning-vector-30228572" title="stop corona virus infection medicine warning vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/85/72/stop-corona-virus-infection-medicine-warning-vector-30228572.jpg" title="stop corona virus infection medicine warning" alt="stop corona virus infection medicine warning vector image"></noscript></a></li>
+						<li data-id="30230932" data-title="stop covid-19 sign corona virus symbol" data-src="https://cdn3.vectorstock.com/i/thumbs/09/32/stop-covid-19-sign-corona-virus-symbol-vector-30230932.jpg"><a href="//www.vectorstock.com/royalty-free-vector/stop-covid-19-sign-corona-virus-symbol-vector-30230932" title="stop covid-19 sign corona virus symbol vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/09/32/stop-covid-19-sign-corona-virus-symbol-vector-30230932.jpg" title="stop covid-19 sign corona virus symbol" alt="stop covid-19 sign corona virus symbol vector image"></noscript></a></li>
+						<li data-id="29546222" data-title="2020 virus concept outline horizontal" data-src="https://cdn3.vectorstock.com/i/thumbs/62/22/2020-virus-concept-outline-horizontal-vector-29546222.jpg"><a href="//www.vectorstock.com/royalty-free-vector/2020-virus-concept-outline-horizontal-vector-29546222" title="2020 virus concept outline horizontal vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/62/22/2020-virus-concept-outline-horizontal-vector-29546222.jpg" title="2020 virus concept outline horizontal" alt="2020 virus concept outline horizontal vector image"></noscript></a></li>
+						<li data-id="29198163" data-title="coronavirus icon" data-src="https://cdn4.vectorstock.com/i/thumbs/81/63/coronavirus-icon-vector-29198163.jpg"><a href="//www.vectorstock.com/royalty-free-vector/coronavirus-icon-vector-29198163" title="coronavirus icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/81/63/coronavirus-icon-vector-29198163.jpg" title="coronavirus icon" alt="coronavirus icon vector image"></noscript></a></li>
+						<li data-id="24280802" data-title="triagle biohazard sign image" data-src="https://cdn3.vectorstock.com/i/thumbs/08/02/triagle-biohazard-sign-image-vector-24280802.jpg"><a href="//www.vectorstock.com/royalty-free-vector/triagle-biohazard-sign-image-vector-24280802" title="triagle biohazard sign image vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/08/02/triagle-biohazard-sign-image-vector-24280802.jpg" title="triagle biohazard sign image" alt="triagle biohazard sign image vector image"></noscript></a></li>
+						<li data-id="30429287" data-title="dangerous bacteria it is transmitted airborne" data-src="https://cdn3.vectorstock.com/i/thumbs/92/87/dangerous-bacteria-it-is-transmitted-airborne-vector-30429287.jpg"><a href="//www.vectorstock.com/royalty-free-vector/dangerous-bacteria-it-is-transmitted-airborne-vector-30429287" title="dangerous bacteria it is transmitted airborne vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/92/87/dangerous-bacteria-it-is-transmitted-airborne-vector-30429287.jpg" title="dangerous bacteria it is transmitted airborne" alt="dangerous bacteria it is transmitted airborne vector image"></noscript></a></li>
+						<li data-id="29107392" data-title="virus cells guard logo icon design" data-src="https://cdn3.vectorstock.com/i/thumbs/73/92/virus-cells-guard-logo-icon-design-vector-29107392.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-cells-guard-logo-icon-design-vector-29107392" title="virus cells guard logo icon design vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/73/92/virus-cells-guard-logo-icon-design-vector-29107392.jpg" title="virus cells guard logo icon design" alt="virus cells guard logo icon design vector image"></noscript></a></li>
+						<li data-id="30194897" data-title="biohazard health medical warning 3d symbol" data-src="https://cdn3.vectorstock.com/i/thumbs/48/97/biohazard-health-medical-warning-3d-symbol-vector-30194897.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biohazard-health-medical-warning-3d-symbol-vector-30194897" title="biohazard health medical warning 3d symbol vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/48/97/biohazard-health-medical-warning-3d-symbol-vector-30194897.jpg" title="biohazard health medical warning 3d symbol" alt="biohazard health medical warning 3d symbol vector image"></noscript></a></li>
+						<li data-id="30282724" data-title="stop covid-19 sign amp symbol on white" data-src="https://cdn5.vectorstock.com/i/thumbs/27/24/stop-covid-19-sign-amp-symbol-on-white-vector-30282724.jpg"><a href="//www.vectorstock.com/royalty-free-vector/stop-covid-19-sign-amp-symbol-on-white-vector-30282724" title="stop covid-19 sign amp symbol on white vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/27/24/stop-covid-19-sign-amp-symbol-on-white-vector-30282724.jpg" title="stop covid-19 sign amp symbol on white" alt="stop covid-19 sign amp symbol on white vector image"></noscript></a></li>
+						<li data-id="29318783" data-title="stop coronavirus red sign" data-src="https://cdn4.vectorstock.com/i/thumbs/87/83/stop-coronavirus-red-sign-vector-29318783.jpg"><a href="//www.vectorstock.com/royalty-free-vector/stop-coronavirus-red-sign-vector-29318783" title="stop coronavirus red sign vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/87/83/stop-coronavirus-red-sign-vector-29318783.jpg" title="stop coronavirus red sign" alt="stop coronavirus red sign vector image"></noscript></a></li>
+						<li data-id="30437889" data-title="virus abstract 3d viral microbe on blue" data-src="https://cdn5.vectorstock.com/i/thumbs/78/89/virus-abstract-3d-viral-microbe-on-blue-vector-30437889.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-abstract-3d-viral-microbe-on-blue-vector-30437889" title="virus abstract 3d viral microbe on blue vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/78/89/virus-abstract-3d-viral-microbe-on-blue-vector-30437889.jpg" title="virus abstract 3d viral microbe on blue" alt="virus abstract 3d viral microbe on blue vector image"></noscript></a></li>
+						<li data-id="26165389" data-title="bio hazard sign caution biological danger toxic" data-src="https://cdn5.vectorstock.com/i/thumbs/53/89/bio-hazard-sign-caution-biological-danger-toxic-vector-26165389.jpg"><a href="//www.vectorstock.com/royalty-free-vector/bio-hazard-sign-caution-biological-danger-toxic-vector-26165389" title="bio hazard sign caution biological danger toxic vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/53/89/bio-hazard-sign-caution-biological-danger-toxic-vector-26165389.jpg" title="bio hazard sign caution biological danger toxic" alt="bio hazard sign caution biological danger toxic vector image"></noscript></a></li>
+						<li data-id="30317381" data-title="handdrawn covid logo" data-src="https://cdn2.vectorstock.com/i/thumbs/73/81/handdrawn-covid-logo-vector-30317381.jpg"><a href="//www.vectorstock.com/royalty-free-vector/handdrawn-covid-logo-vector-30317381" title="handdrawn covid logo vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumbs/73/81/handdrawn-covid-logo-vector-30317381.jpg" title="handdrawn covid logo" alt="handdrawn covid logo vector image"></noscript></a></li>
+						<li data-id="29918009" data-title="quarantine icon crossed out a red line" data-src="https://cdn5.vectorstock.com/i/thumbs/80/09/quarantine-icon-crossed-out-a-red-line-vector-29918009.jpg"><a href="//www.vectorstock.com/royalty-free-vector/quarantine-icon-crossed-out-a-red-line-vector-29918009" title="quarantine icon crossed out a red line vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/80/09/quarantine-icon-crossed-out-a-red-line-vector-29918009.jpg" title="quarantine icon crossed out a red line" alt="quarantine icon crossed out a red line vector image"></noscript></a></li>
+						<li data-id="27725077" data-title="stop sign with black bacteria creature isolated on" data-src="https://cdn3.vectorstock.com/i/thumbs/50/77/stop-sign-with-black-bacteria-creature-isolated-on-vector-27725077.jpg"><a href="//www.vectorstock.com/royalty-free-vector/stop-sign-with-black-bacteria-creature-isolated-on-vector-27725077" title="stop sign with black bacteria creature isolated on vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/50/77/stop-sign-with-black-bacteria-creature-isolated-on-vector-27725077.jpg" title="stop sign with black bacteria creature isolated on" alt="stop sign with black bacteria creature isolated on vector image"></noscript></a></li>
+						<li data-id="30100700" data-title="pandemic stop novel coronavirus outbreak covid-19" data-src="https://cdn1.vectorstock.com/i/thumbs/07/00/pandemic-stop-novel-coronavirus-outbreak-covid-19-vector-30100700.jpg"><a href="//www.vectorstock.com/royalty-free-vector/pandemic-stop-novel-coronavirus-outbreak-covid-19-vector-30100700" title="pandemic stop novel coronavirus outbreak covid-19 vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumbs/07/00/pandemic-stop-novel-coronavirus-outbreak-covid-19-vector-30100700.jpg" title="pandemic stop novel coronavirus outbreak covid-19" alt="pandemic stop novel coronavirus outbreak covid-19 vector image"></noscript></a></li>
+						<li data-id="6533082" data-title="Biohazard Symbol" data-src="https://cdn3.vectorstock.com/i/thumbs/30/82/biohazard-symbol-vector-6533082.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biohazard-symbol-vector-6533082" title="Biohazard Symbol vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/30/82/biohazard-symbol-vector-6533082.jpg" title="Biohazard Symbol" alt="Biohazard Symbol vector image"></noscript></a></li>
+						<li data-id="30257058" data-title="covid-19 or coronavirus under a magnifying glass" data-src="https://cdn4.vectorstock.com/i/thumbs/70/58/covid-19-or-coronavirus-under-a-magnifying-glass-vector-30257058.jpg"><a href="//www.vectorstock.com/royalty-free-vector/covid-19-or-coronavirus-under-a-magnifying-glass-vector-30257058" title="covid-19 or coronavirus under a magnifying glass vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/70/58/covid-19-or-coronavirus-under-a-magnifying-glass-vector-30257058.jpg" title="covid-19 or coronavirus under a magnifying glass" alt="covid-19 or coronavirus under a magnifying glass vector image"></noscript></a></li>
+						<li data-id="30500573" data-title="coronavirus logotype the image a" data-src="https://cdn4.vectorstock.com/i/thumbs/05/73/coronavirus-logotype-the-image-a-vector-30500573.jpg"><a href="//www.vectorstock.com/royalty-free-vector/coronavirus-logotype-the-image-a-vector-30500573" title="coronavirus logotype the image a vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/05/73/coronavirus-logotype-the-image-a-vector-30500573.jpg" title="coronavirus logotype the image a" alt="coronavirus logotype the image a vector image"></noscript></a></li>
+						<li data-id="8928925" data-title="Biohazard Icon" data-src="https://cdn1.vectorstock.com/i/thumbs/89/25/biohazard-icon-vector-8928925.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biohazard-icon-vector-8928925" title="Biohazard Icon vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumbs/89/25/biohazard-icon-vector-8928925.jpg" title="Biohazard Icon" alt="Biohazard Icon vector image"></noscript></a></li>
+						<li data-id="30191012" data-title="antiviral and antibacterial icon icons set" data-src="https://cdn3.vectorstock.com/i/thumbs/10/12/antiviral-and-antibacterial-icon-icons-set-vector-30191012.jpg"><a href="//www.vectorstock.com/royalty-free-vector/antiviral-and-antibacterial-icon-icons-set-vector-30191012" title="antiviral and antibacterial icon icons set vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/10/12/antiviral-and-antibacterial-icon-icons-set-vector-30191012.jpg" title="antiviral and antibacterial icon icons set" alt="antiviral and antibacterial icon icons set vector image"></noscript></a></li>
+						<li data-id="29971306" data-title="stop 2019-ncov coronavirus sign" data-src="https://cdn2.vectorstock.com/i/thumbs/13/06/stop-2019-ncov-coronavirus-sign-vector-29971306.jpg"><a href="//www.vectorstock.com/royalty-free-vector/stop-2019-ncov-coronavirus-sign-vector-29971306" title="stop 2019-ncov coronavirus sign vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumbs/13/06/stop-2019-ncov-coronavirus-sign-vector-29971306.jpg" title="stop 2019-ncov coronavirus sign" alt="stop 2019-ncov coronavirus sign vector image"></noscript></a></li>
+						<li data-id="30217447" data-title="biohazard sign on yellow background concept of" data-src="https://cdn3.vectorstock.com/i/thumbs/74/47/biohazard-sign-on-yellow-background-concept-of-vector-30217447.jpg"><a href="//www.vectorstock.com/royalty-free-vector/biohazard-sign-on-yellow-background-concept-of-vector-30217447" title="biohazard sign on yellow background concept of vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/74/47/biohazard-sign-on-yellow-background-concept-of-vector-30217447.jpg" title="biohazard sign on yellow background concept of" alt="biohazard sign on yellow background concept of vector image"></noscript></a></li>
+						<li data-id="30102160" data-title="12 n un 12 un" data-src="https://cdn1.vectorstock.com/i/thumbs/21/60/12-n-un-12-un-vector-30102160.jpg"><a href="//www.vectorstock.com/royalty-free-vector/12-n-un-12-un-vector-30102160" title="12 n un 12 un vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumbs/21/60/12-n-un-12-un-vector-30102160.jpg" title="12 n un 12 un" alt="12 n un 12 un vector image"></noscript></a></li>
+						<li data-id="29431831" data-title="coronavirus icons set" data-src="https://cdn2.vectorstock.com/i/thumbs/18/31/coronavirus-icons-set-vector-29431831.jpg"><a href="//www.vectorstock.com/royalty-free-vector/coronavirus-icons-set-vector-29431831" title="coronavirus icons set vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumbs/18/31/coronavirus-icons-set-vector-29431831.jpg" title="coronavirus icons set" alt="coronavirus icons set vector image"></noscript></a></li>
+						<li data-id="30376340" data-title="covid-19 biohazard warning poster" data-src="https://cdn1.vectorstock.com/i/thumbs/63/40/covid-19-biohazard-warning-poster-vector-30376340.jpg"><a href="//www.vectorstock.com/royalty-free-vector/covid-19-biohazard-warning-poster-vector-30376340" title="covid-19 biohazard warning poster vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumbs/63/40/covid-19-biohazard-warning-poster-vector-30376340.jpg" title="covid-19 biohazard warning poster" alt="covid-19 biohazard warning poster vector image"></noscript></a></li>
+						<li data-id="29433252" data-title="coronavirus cell 2019-ncov china pathogen" data-src="https://cdn3.vectorstock.com/i/thumbs/32/52/coronavirus-cell-2019-ncov-china-pathogen-vector-29433252.jpg"><a href="//www.vectorstock.com/royalty-free-vector/coronavirus-cell-2019-ncov-china-pathogen-vector-29433252" title="coronavirus cell 2019-ncov china pathogen vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/32/52/coronavirus-cell-2019-ncov-china-pathogen-vector-29433252.jpg" title="coronavirus cell 2019-ncov china pathogen" alt="coronavirus cell 2019-ncov china pathogen vector image"></noscript></a></li>
+						<li data-id="17700677" data-title="stop virus sign in red" data-src="https://cdn3.vectorstock.com/i/thumbs/06/77/stop-virus-sign-in-red-vector-17700677.jpg"><a href="//www.vectorstock.com/royalty-free-vector/stop-virus-sign-in-red-vector-17700677" title="stop virus sign in red vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/06/77/stop-virus-sign-in-red-vector-17700677.jpg" title="stop virus sign in red" alt="stop virus sign in red vector image"></noscript></a></li>
+						<li class="more"><div><a href="/royalty-free-vectors/vectors-similar-to_30019856" rel="nofollow"><span class="lrg">More Images…</span><span class="sml">More</span></a></div></li>
+					</ul>
+				</div>
+			</div>
+			<div id="group-artist" class="group">
+				<h6><span class="icon"></span><strong>More by <a href="/royalty-free-vectors/vectors-by_shuttersport" rel="nofollow">shuttersport</a></strong></h6>
+
+				<div class="gallery large">
+					<ul>
+						<li data-src="https://cdn3.vectorstock.com/i/thumb-large/98/47/virus-logo-design-template-danger-bacteria-icon-vector-30019847.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019847" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumb-large/98/47/virus-logo-design-template-danger-bacteria-icon-vector-30019847.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn4.vectorstock.com/i/thumb-large/98/73/virus-logo-design-template-danger-bacteria-icon-vector-30019873.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019873" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumb-large/98/73/virus-logo-design-template-danger-bacteria-icon-vector-30019873.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn4.vectorstock.com/i/thumb-large/98/53/virus-logo-design-template-danger-bacteria-icon-vector-30019853.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019853" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumb-large/98/53/virus-logo-design-template-danger-bacteria-icon-vector-30019853.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn1.vectorstock.com/i/thumb-large/98/65/virus-logo-design-template-danger-bacteria-icon-vector-30019865.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019865" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumb-large/98/65/virus-logo-design-template-danger-bacteria-icon-vector-30019865.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn3.vectorstock.com/i/thumb-large/98/72/virus-logo-design-template-danger-bacteria-icon-vector-30019872.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019872" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumb-large/98/72/virus-logo-design-template-danger-bacteria-icon-vector-30019872.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn2.vectorstock.com/i/thumb-large/98/46/virus-logo-design-template-danger-bacteria-icon-vector-30019846.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019846" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumb-large/98/46/virus-logo-design-template-danger-bacteria-icon-vector-30019846.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn2.vectorstock.com/i/thumb-large/98/81/virus-logo-design-template-danger-bacteria-icon-vector-30019881.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019881" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumb-large/98/81/virus-logo-design-template-danger-bacteria-icon-vector-30019881.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn1.vectorstock.com/i/thumb-large/98/45/virus-logo-design-template-danger-bacteria-icon-vector-30019845.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019845" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumb-large/98/45/virus-logo-design-template-danger-bacteria-icon-vector-30019845.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn5.vectorstock.com/i/thumb-large/98/64/virus-logo-design-template-danger-bacteria-icon-vector-30019864.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019864" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumb-large/98/64/virus-logo-design-template-danger-bacteria-icon-vector-30019864.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+						<li data-src="https://cdn4.vectorstock.com/i/thumb-large/98/68/virus-logo-design-template-danger-bacteria-icon-vector-30019868.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019868" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumb-large/98/68/virus-logo-design-template-danger-bacteria-icon-vector-30019868.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image"></noscript></a></li>
+					</ul>
+				</div>
+				<div class="gallery small more">
+					<ul>
+						<li data-id="30019848" data-title="virus logo design template danger bacteria icon" data-src="https://cdn4.vectorstock.com/i/thumbs/98/48/virus-logo-design-template-danger-bacteria-icon-vector-30019848.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019848" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/98/48/virus-logo-design-template-danger-bacteria-icon-vector-30019848.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019871" data-title="virus logo design template danger bacteria icon" data-src="https://cdn2.vectorstock.com/i/thumbs/98/71/virus-logo-design-template-danger-bacteria-icon-vector-30019871.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019871" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumbs/98/71/virus-logo-design-template-danger-bacteria-icon-vector-30019871.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019878" data-title="virus logo design template danger bacteria icon" data-src="https://cdn4.vectorstock.com/i/thumbs/98/78/virus-logo-design-template-danger-bacteria-icon-vector-30019878.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019878" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/98/78/virus-logo-design-template-danger-bacteria-icon-vector-30019878.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019867" data-title="virus logo design template danger bacteria icon" data-src="https://cdn3.vectorstock.com/i/thumbs/98/67/virus-logo-design-template-danger-bacteria-icon-vector-30019867.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019867" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/98/67/virus-logo-design-template-danger-bacteria-icon-vector-30019867.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019884" data-title="virus logo design template danger bacteria icon" data-src="https://cdn5.vectorstock.com/i/thumbs/98/84/virus-logo-design-template-danger-bacteria-icon-vector-30019884.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019884" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/98/84/virus-logo-design-template-danger-bacteria-icon-vector-30019884.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019862" data-title="virus logo design template danger bacteria icon" data-src="https://cdn3.vectorstock.com/i/thumbs/98/62/virus-logo-design-template-danger-bacteria-icon-vector-30019862.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019862" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/98/62/virus-logo-design-template-danger-bacteria-icon-vector-30019862.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019883" data-title="virus logo design template danger bacteria icon" data-src="https://cdn4.vectorstock.com/i/thumbs/98/83/virus-logo-design-template-danger-bacteria-icon-vector-30019883.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019883" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/98/83/virus-logo-design-template-danger-bacteria-icon-vector-30019883.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019866" data-title="virus logo design template danger bacteria icon" data-src="https://cdn2.vectorstock.com/i/thumbs/98/66/virus-logo-design-template-danger-bacteria-icon-vector-30019866.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019866" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumbs/98/66/virus-logo-design-template-danger-bacteria-icon-vector-30019866.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019851" data-title="virus logo design template danger bacteria icon" data-src="https://cdn2.vectorstock.com/i/thumbs/98/51/virus-logo-design-template-danger-bacteria-icon-vector-30019851.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019851" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumbs/98/51/virus-logo-design-template-danger-bacteria-icon-vector-30019851.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019858" data-title="virus logo design template danger bacteria icon" data-src="https://cdn4.vectorstock.com/i/thumbs/98/58/virus-logo-design-template-danger-bacteria-icon-vector-30019858.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019858" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/98/58/virus-logo-design-template-danger-bacteria-icon-vector-30019858.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019850" data-title="virus logo design template danger bacteria icon" data-src="https://cdn1.vectorstock.com/i/thumbs/98/50/virus-logo-design-template-danger-bacteria-icon-vector-30019850.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019850" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumbs/98/50/virus-logo-design-template-danger-bacteria-icon-vector-30019850.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019880" data-title="virus logo design template danger bacteria icon" data-src="https://cdn1.vectorstock.com/i/thumbs/98/80/virus-logo-design-template-danger-bacteria-icon-vector-30019880.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019880" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn1.vectorstock.com/i/thumbs/98/80/virus-logo-design-template-danger-bacteria-icon-vector-30019880.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019869" data-title="virus logo design template danger bacteria icon" data-src="https://cdn5.vectorstock.com/i/thumbs/98/69/virus-logo-design-template-danger-bacteria-icon-vector-30019869.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019869" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/98/69/virus-logo-design-template-danger-bacteria-icon-vector-30019869.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019882" data-title="virus logo design template danger bacteria icon" data-src="https://cdn3.vectorstock.com/i/thumbs/98/82/virus-logo-design-template-danger-bacteria-icon-vector-30019882.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019882" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/98/82/virus-logo-design-template-danger-bacteria-icon-vector-30019882.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019857" data-title="virus logo design template danger bacteria icon" data-src="https://cdn3.vectorstock.com/i/thumbs/98/57/virus-logo-design-template-danger-bacteria-icon-vector-30019857.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019857" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/98/57/virus-logo-design-template-danger-bacteria-icon-vector-30019857.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019879" data-title="virus logo design template danger bacteria icon" data-src="https://cdn5.vectorstock.com/i/thumbs/98/79/virus-logo-design-template-danger-bacteria-icon-vector-30019879.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019879" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/98/79/virus-logo-design-template-danger-bacteria-icon-vector-30019879.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019854" data-title="virus logo design template danger bacteria icon" data-src="https://cdn5.vectorstock.com/i/thumbs/98/54/virus-logo-design-template-danger-bacteria-icon-vector-30019854.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019854" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn5.vectorstock.com/i/thumbs/98/54/virus-logo-design-template-danger-bacteria-icon-vector-30019854.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019863" data-title="virus logo design template danger bacteria icon" data-src="https://cdn4.vectorstock.com/i/thumbs/98/63/virus-logo-design-template-danger-bacteria-icon-vector-30019863.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019863" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn4.vectorstock.com/i/thumbs/98/63/virus-logo-design-template-danger-bacteria-icon-vector-30019863.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019861" data-title="virus logo design template danger bacteria icon" data-src="https://cdn2.vectorstock.com/i/thumbs/98/61/virus-logo-design-template-danger-bacteria-icon-vector-30019861.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019861" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn2.vectorstock.com/i/thumbs/98/61/virus-logo-design-template-danger-bacteria-icon-vector-30019861.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li data-id="30019852" data-title="virus logo design template danger bacteria icon" data-src="https://cdn3.vectorstock.com/i/thumbs/98/52/virus-logo-design-template-danger-bacteria-icon-vector-30019852.jpg"><a href="//www.vectorstock.com/royalty-free-vector/virus-logo-design-template-danger-bacteria-icon-vector-30019852" title="virus logo design template danger bacteria icon vector image"><noscript><img src="https://cdn3.vectorstock.com/i/thumbs/98/52/virus-logo-design-template-danger-bacteria-icon-vector-30019852.jpg" title="virus logo design template danger bacteria icon" alt="virus logo design template danger bacteria icon vector image vector image"></noscript></a></li>
+						<li class="more"><div><a href="/royalty-free-vectors/vectors-by_shuttersport" rel="nofollow"><span class="lrg">More Images…</span><span class="sml">More</span></a></div></li>
+					</ul>
+				</div>
+			</div>
+			<div id="group-keywords" class="group">
+				<h6><span class="icon"></span><strong>Related Searches</strong></h6>
+				<ul>
+					<li><a href="/royalty-free-vectors/logo-vectors">Logo</a></li>
+					<li><a href="/royalty-free-vectors/icon-vectors">Icon</a></li>
+					<li><a href="/royalty-free-vectors/bacteria-vectors">Bacteria</a></li>
+					<li><a href="/royalty-free-vectors/virus-vectors">Virus</a></li>
+					<li><a href="/royalty-free-vectors/danger-vectors">Danger</a></li>
+					<li><a href="/royalty-free-vectors/bacterium-vectors">Bacterium</a></li>
+					<li><a href="/royalty-free-vectors/isolated-vectors">Isolated</a></li>
+					<li><a href="/royalty-free-vectors/medical-vectors">Medical</a></li>
+					<li><a href="/royalty-free-vectors/symbol-vectors">Symbol</a></li>
+					<li><a href="/royalty-free-vectors/illness-vectors">Illness</a></li>
+					<li><a href="/royalty-free-vectors/hazard-vectors">Hazard</a></li>
+					<li><a href="/royalty-free-vectors/organism-vectors">Organism</a></li>
+					<li><a href="/royalty-free-vectors/alert-vectors">Alert</a></li>
+					<li><a href="/royalty-free-vectors/attention-vectors">Attention</a></li>
+					<li><a href="/royalty-free-vectors/toxic-vectors">Toxic</a></li>
+					<li><a href="/royalty-free-vectors/microscopic-vectors">Microscopic</a></li>
+					<li><a href="/royalty-free-vectors/contamination-vectors">Contamination</a></li>
+					<li><a href="/royalty-free-vectors/biohazard-vectors">Biohazard</a></li>
+					<li><a href="/royalty-free-vectors/contagion-vectors">Contagion</a></li>
+					<li><a href="/royalty-free-vectors/epidemic-vectors">Epidemic</a></li>
+					<li><a href="/royalty-free-vectors/vector-vectors">Vector</a></li>
+					<li><a href="/royalty-free-vectors/safety-vectors">Safety</a></li>
+					<li><a href="/royalty-free-vectors/bio-vectors">Bio</a></li>
+					<li><a href="/royalty-free-vectors/illustration-vectors">Illustration</a></li>
+					<li><a href="/royalty-free-vectors/medicine-vectors">Medicine</a></li>
+					<li><a href="/royalty-free-vectors/cell-vectors">Cell</a></li>
+					<li><a href="/royalty-free-vectors/security-vectors">Security</a></li>
+					<li><a href="/royalty-free-vectors/sign-vectors">Sign</a></li>
+					<li><a href="/royalty-free-vectors/yellow-vectors">Yellow</a></li>
+					<li><a href="/royalty-free-vectors/science-vectors">Science</a></li>
+					<li><a href="/royalty-free-vectors/sick-vectors">Sick</a></li>
+					<li><a href="/royalty-free-vectors/biology-vectors">Biology</a></li>
+					<li><a href="/royalty-free-vectors/lab-vectors">Lab</a></li>
+					<li><a href="/royalty-free-vectors/dangerous-vectors">Dangerous</a></li>
+					<li><a href="/royalty-free-vectors/research-vectors">Research</a></li>
+					<li><a href="/royalty-free-vectors/caution-vectors">Caution</a></li>
+					<li><a href="/royalty-free-vectors/human-vectors">Human</a></li>
+					<li><a href="/royalty-free-vectors/viral-vectors">Viral</a></li>
+					<li><a href="/royalty-free-vectors/outline-vectors">Outline</a></li>
+					<li><a href="/royalty-free-vectors/microorganism-vectors">Microorganism</a></li>
+					<li><a href="/royalty-free-vectors/bacillus-vectors">Bacillus</a></li>
+					<li><a href="/royalty-free-vectors/pathogen-vectors">Pathogen</a></li>
+					<li><a href="/royalty-free-vectors/nature-vectors">Nature</a></li>
+					<li><a href="/royalty-free-vectors/infection-vectors">Infection</a></li>
+					<li><a href="/royalty-free-vectors/bacterial-vectors">Bacterial</a></li>
+					<li><a href="/royalty-free-vectors/health-vectors">Health</a></li>
+					<li><a href="/royalty-free-vectors/ill-vectors">Ill</a></li>
+					<li><a href="/royalty-free-vectors/microbe-vectors">Microbe</a></li>
+					<li><a href="/royalty-free-vectors/circle-vectors">Circle</a></li>
+					<li><a href="/royalty-free-vectors/germ-vectors">Germ</a></li>
+				</ul>
+			</div>
+		</section>
+	</article>
+
+	<!-- Footer -->
+	<footer>
+
+		<div>
+		<div class="column c1">
+			<nav class="company">
+				<h4>VectorStock</h4>
+				<ul>
+					<li><a href="/" title="Home">Home</a></li>
+					<li class="sel"><a href="/free-vectors" title="Free Vectors">Free Vectors</a></li>
+					<li class="sel"><a href="/royalty-free-vectors" title="All Royalty-Free Vectors">All Vectors</a></li>
+				</ul>
+				<ul>
+					<li><a href="/what-is-a-vector" title="What is a Vector?">What is a Vector?</a></li>
+				</ul>
+				<ul>
+					<li class="sel"><a href="/faq" title="Frequently Asked Questions"><span class="long">Frequently Asked Questions</span><span class="short">FAQs</span></a></li>
+					<li><a href="/faq/members/terms-of-use" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
+					<li class="sel"><a href="/contact" title="Contact Us">Contact Us</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="column c2">
+			<nav class="account">
+					<h4><span class="title">Account</span><span class="icon"></span></h4>
+					<ul>
+						<li><a href="/signup" title="Join Now">Join Now</a></li>
+						<li><a href="/pricing" title="Pricing">Pricing</a></li>
+						<li><a href="?signup=1&contributor=1" title="Contributor Sign Up">Contributor Sign Up</a></li>
+						<li><a href="/faq/artists/why-sell-at-vectorstock" title="Contributor FAQ">Contributor FAQ</a></li>
+					</ul>
+			</nav>
+		</div>
+		<div class="column c3">
+			<nav class="social">
+				<h4>Social</h4>
+				<ul>
+					<li class="facebook sel"><a href="http://www.facebook.com/VectorStock" target="_blank"><span class="title">Facebook</span><span class="icon"></span></a></li>
+					<li class="pinterest sel"><a href="http://pinterest.com/vectorstock/" target="_blank"><span class="title">Pinterest</span><span class="icon"></span></a></li>
+					<li class="twitter sel"><a href="https://twitter.com/VectorStock" target="_blank"><span class="title">Twitter</span><span class="icon"></span></a></li>
+				</ul>
+			</nav>
+			<div class="signoff">
+				<h5><a href="https://www.vectorstock.com/" title="VectorStock®">VectorStock®</a></h5>
+				<p>VectorStock and the VectorStock logo are registered trademarks of VectorStock Media.<br>
+				© 2020. <span>All Rights Reserved.</span></p>
+			</div>
+		</div>
+	</div></footer>
+
+
+	<script src="//www.googleadservices.com/pagead/conversion_async.js"></script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"02e09611df","applicationID":"156179534","transactionName":"ZV0ENRYCC0RYAkVbDVwXJRQXFwpaFhNeSwNeTB9MAhEAUhQXVFEWXUpJFw0GEg==","queueTime":0,"applicationTime":84,"atts":"SRoHQ14YGEo=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+</body>
+</html>
