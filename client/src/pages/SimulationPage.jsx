@@ -15,7 +15,7 @@ var canvas = {
   y: 800,
 };
 const radius = 3; // Size of an agent
-const popSize = 500;
+const popSize = 600;
 
 // Setting the space in the simulation
 var oneMeterInTheSimulation = 2 * radius; // how many pixels in the simulation are 1 m. 1 agent = 1 m²
@@ -30,15 +30,18 @@ const oneDayInTheSimulation = 1; // how long in sec does a day in the simulation
 const simDay = oneDayInTheSimulation * defaultFps; // How many frames is a day in the simulation ?
 
 // Baics of the simulation
+const speedModulator = 0.3;
 var agents = [];
-var contagionRadius = 8;
-var initialSickPercentage = 0.01;
+var contagionRadius = 6;
+const distancingRadius = 15;
+var initialSickPercentage = 0.005;
 var walkingSpeed = 1.4 * oneMeterInTheSimulation; // 1,2 m/s * equivalent en pixel
+var isSocialDistancing = false;
 
 // Setting up scientific values linked to Covid
 const timeToHeal = 12 * simDay; // 12 days to heal by itself
 const timeToSymptoms = 5 * simDay; // Incubation time
-var gettingSickProba = 0.5 / contagionRadius; // If the contagionRadius increases, then the time spent in the radius increases, not wanted
+var gettingSickProba = 0.2 / contagionRadius; // If the contagionRadius increases, then the time spent in the radius increases, not wanted
 
 // React component
 const SimulationPage = () => {
@@ -51,12 +54,11 @@ const SimulationPage = () => {
   const [currentImmunizedPop, setCurrentImmunizedPop] = useState(0);
   const [currentRFactor, setCurrentRFactor] = useState(0);
   const [currentDay, setCurrentDay] = useState(0);
-  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     initCanvas();
     initChart();
-    createTheAgents();
+    createTheAgents(popSize);
     animate();
   }, []);
 
@@ -82,7 +84,7 @@ const SimulationPage = () => {
             var series = this.series[0];
             setInterval(function () {
               var y = agents.filter((e) => e.isSick).length;
-              var x = currentFrame;
+              var x = currentFrame / simDay;
               series.addPoint([x, y], true, false);
             }, 250);
           },
@@ -144,9 +146,8 @@ const SimulationPage = () => {
   };
 
   // Create the agents
-  const createTheAgents = () => {
-    const speedModulator = 0.3;
-    for (let i = 0; i < numberOfAgents; i++) {
+  const createTheAgents = (nb) => {
+    for (let i = 0; i < nb; i++) {
       // Starting Position
       var x = Math.random() * (canvas.x - radius * 2) + radius;
       var y = Math.random() * (canvas.y - radius * 2) + radius;
@@ -198,25 +199,39 @@ const SimulationPage = () => {
     this.isImmunized = false;
     this.isDead = false;
     this.R = 0; // how many agents I contamined
+    this.closeAgents = [];
 
     // If sick, the agent will be contagious = Give the infection
     this.spreadTheInfection = function () {
+      this.closeAgents
+        .filter((agent) => {
+          return (
+            agent.x <= this.x + 2 * contagionRadius &&
+            agent.x >= this.x - 2 * contagionRadius &&
+            agent.y <= this.y + 2 * contagionRadius &&
+            agent.y >= this.y - 2 * contagionRadius &&
+            !agent.isImmunized &&
+            !agent.isSick
+          );
+        })
+        .map((item, i) => {
+          if (Math.random() < gettingSickProba) {
+            item.isSick = true;
+            this.R++;
+          }
+          item.sickOn = currentFrame;
+        });
+    };
+
+    // Get the closeAgents
+    this.getCloseAgents = () => {
       this.closeAgents = agents.filter((agent) => {
         return (
-          agent.x < this.x + 2 * contagionRadius &&
-          agent.x > this.x - 2 * contagionRadius &&
-          agent.y < this.y + 2 * contagionRadius &&
-          agent.y > this.y - 2 * contagionRadius &&
-          !agent.isImmunized &&
-          !agent.isSick
+          agent.x <= this.x + 2 * distancingRadius &&
+          agent.x >= this.x - 2 * distancingRadius &&
+          agent.y <= this.y + 2 * distancingRadius &&
+          agent.y >= this.y - 2 * distancingRadius
         );
-      });
-      this.closeAgents.map((item, i) => {
-        if (Math.random() < gettingSickProba) {
-          item.isSick = true;
-          this.R++;
-        }
-        item.sickOn = currentFrame;
       });
     };
 
@@ -256,26 +271,53 @@ const SimulationPage = () => {
       if (this.isSick) {
         c.fillStyle = "red";
       }
-      if (this.isAwareThatSick) {
-        c.fillStyle = "blue";
-      }
+      // if (this.isAwareThatSick) {
+      //   c.fillStyle = "blue";
+      // }
       if (this.isImmunized) {
         c.fillStyle = "yellow";
       }
       c.fill();
     };
 
-    // Make them move !
-    this.update = function () {
-      if (this.x + this.radius > canvas.x || this.x - this.radius < 0) {
-        this.dx = -this.dx;
+    this.wander = function () {
+      // If social distancing, stay away from others
+
+      // Basic rule to stay in the canvas
+      if (
+        this.x + this.radius > canvas.x ||
+        this.x - this.radius < 0 ||
+        this.y + this.radius > canvas.y ||
+        this.y - this.radius < 0
+      ) {
+        if (this.x + this.radius > canvas.x || this.x - this.radius < 0) {
+          this.dx = -this.dx;
+        }
+        if (this.y + this.radius > canvas.y || this.y - this.radius < 0) {
+          this.dy = -this.dy;
+        }
+      }
+      // Social distancing
+      else if (isSocialDistancing) {
+        // Bounce like a big fat circle
+        this.nearestAgent = this.closeAgents[0];
+        if (Math.sign(this.nearestAgent.x - this.x) === Math.sign(this.dx)) {
+          this.dx = -this.dx;
+        }
+        if (Math.sign(this.nearestAgent.y - this.y) === Math.sign(this.dy)) {
+          this.dy = -this.dy;
+        }
       }
 
-      if (this.y + this.radius > canvas.y || this.y - this.radius < 0) {
-        this.dy = -this.dy;
-      }
+      // Move the agent
       this.x += this.dx;
       this.y += this.dy;
+    };
+
+    // Make them move !
+    this.update = function () {
+      this.getCloseAgents();
+      this.wander();
 
       this.draw();
 
@@ -295,13 +337,21 @@ const SimulationPage = () => {
     switch (type) {
       case "masksOn":
         console.log("masksOn");
-        contagionRadius = 4;
-        gettingSickProba = gettingSickProba / 2;
+        contagionRadius = contagionRadius / 1.2;
+        gettingSickProba = gettingSickProba / 1.2;
         break;
       case "masksOff":
         console.log("masksOff");
-        contagionRadius = 8;
-        gettingSickProba = gettingSickProba * 2;
+        contagionRadius = contagionRadius * 1.2;
+        gettingSickProba = gettingSickProba * 1.2;
+        break;
+      case "socialDistancingOn":
+        console.log("socialDistancingOn");
+        isSocialDistancing = true;
+        break;
+      case "socialDistancingOff":
+        console.log("SocialDistancingOff");
+        isSocialDistancing = false;
         break;
       default:
         break;

@@ -4,10 +4,13 @@ const SimulationPanel = (props) => {
   let sickPop = props.agents.filter((e) => e.isSick).length;
   let immunePop = props.agents.filter((e) => e.isImmunized).length;
 
-  const [masksOn, setMasksOn] = useState(false);
+  var sickPopMax = 0;
 
-  const calculateMax = () => {
-    return 0;
+  const [masksOn, setMasksOn] = useState(false);
+  const [socialDistancing, setSocialDistancing] = useState(false);
+
+  const calculateSickPopMax = (newValue) => {
+    // Analyse graph datas ???
   };
 
   return (
@@ -29,7 +32,7 @@ const SimulationPanel = (props) => {
           <div>
             <h2>Population malade</h2>
             <p className="number">Actuel : {sickPop}</p>
-            <p className="number">Max : {0}</p>
+            <p className="number">Max : {}</p>
           </div>
           <div>
             <h2>Population Immunisées</h2>
@@ -48,6 +51,17 @@ const SimulationPanel = (props) => {
         >
           Masques obligatoires
         </button>
+        {/* <button
+          className={socialDistancing ? "selected" : ""}
+          onClick={() => {
+            props.sendActions(
+              socialDistancing ? "socialDistancingOff" : "socialDistancingOn"
+            );
+            setSocialDistancing(!socialDistancing);
+          }}
+        >
+          Distanciation sociale
+        </button> */}
       </div>
     </div>
   );
