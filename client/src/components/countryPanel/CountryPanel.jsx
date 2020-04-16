@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect } from "react";
 
 var timer = null;
+var colorChosen = [];
 
 function CountryPanel(props) {
   const [countrySearch, setCountrySearch] = useState("");
@@ -53,7 +54,28 @@ function CountryPanel(props) {
     if (selectedCountries.filter((el) => el.country === country).length === 0) {
       let s = [...selectedCountries];
       var randomColor = require("randomcolor");
-      var color = randomColor();
+      const colory = [
+        "#ff5e33",
+        "#ff3333",
+        "#ffdb28",
+        "#76da23",
+        "#2bf3b1",
+        "#22f8f5",
+        "#d122f8",
+        "#f988bb",
+        "#ffffff",
+      ];
+      var b = false;
+      var color = "";
+      while (b == false) {
+        var i = Math.floor(Math.random() * 8);
+        var color = colory[i];
+        if (colorChosen.includes(color) == false) {
+          b = true;
+          colorChosen.push(color);
+        }
+      }
+      console.log(colorChosen);
       s.push({
         country: country,
         color: color,
