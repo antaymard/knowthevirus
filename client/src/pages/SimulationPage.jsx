@@ -1,71 +1,187 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./simulationPage.css";
+import ReactHighcharts from "react-highcharts";
+import Highcharts from "highcharts";
+import "./simulationPage.scss";
+import SimulationPanel from "../components/simulation/SimulationPanel";
 
-// var myCanvas;
+// Setting up general parameters
 var c;
-var agents = [];
-const radius = 5;
-var contagionRadius = radius;
-const popSize = 300;
-var currentFrame = 0;
-const ralenti = 2;
-const timeToHeal = 400;
+var chart;
+const defaultFps = 60; // default value for the animation framerate
+const fps = 30; // How many fps in the simulation ?
+const fpsFactor = defaultFps / fps;
+var canvas = {
+  x: 800,
+  y: 800,
+};
+const radius = 3; // Size of an agent
+const popSize = 600;
 
+// Setting the space in the simulation
+var oneMeterInTheSimulation = 2 * radius; // how many pixels in the simulation are 1 m. 1 agent = 1 m²
+canvas.realX = canvas.x / oneMeterInTheSimulation; // Real width of the canvas in meter
+canvas.realY = canvas.y / oneMeterInTheSimulation; // Real height of the canvas in meter
+canvas.realSurface = canvas.realX * canvas.realY; // Real surface of the canvas in meter²
+var popDensity = popSize / canvas.realSurface; // en hab /m² Paris is 21000 hab / km²
+
+// Setting the time in the simulation
+var currentFrame = 0;
+const oneDayInTheSimulation = 1; // how long in sec does a day in the simulation last ?
+const simDay = oneDayInTheSimulation * defaultFps; // How many frames is a day in the simulation ?
+
+// Baics of the simulation
+const speedModulator = 0.3;
+var agents = [];
+var contagionRadius = 6;
+const distancingRadius = 15;
+var initialSickPercentage = 0.005;
+var walkingSpeed = 1.4 * oneMeterInTheSimulation; // 1,2 m/s * equivalent en pixel
+var isSocialDistancing = false;
+
+// Setting up scientific values linked to Covid
+const timeToHeal = 12 * simDay; // 12 days to heal by itself
+const timeToSymptoms = 5 * simDay; // Incubation time
+var gettingSickProba = 0.2 / contagionRadius; // If the contagionRadius increases, then the time spent in the radius increases, not wanted
+
+// React component
 const SimulationPage = () => {
   const myCanvas = useRef(null);
 
-  // Set the canvas size
-  const [canvasSize, setCanvasSize] = useState({
-    x: 800,
-    y: 800,
-  });
   const [transmissionProba, setTransmissionProba] = useState(0.1);
   const [agentSpeed, setAgentSpeed] = useState(5);
   const [numberOfAgents, setNumberOfAgents] = useState(popSize);
   const [currentSickPop, setCurrentSickPop] = useState(0);
   const [currentImmunizedPop, setCurrentImmunizedPop] = useState(0);
+  const [currentRFactor, setCurrentRFactor] = useState(0);
+  const [currentDay, setCurrentDay] = useState(0);
 
   useEffect(() => {
     initCanvas();
-    createTheAgents();
+    initChart();
+    createTheAgents(popSize);
     animate();
   }, []);
 
   const initCanvas = () => {
-    const canvas = myCanvas.current;
-    c = canvas.getContext("2d");
+    const theCanvas = myCanvas.current;
+    c = theCanvas.getContext("2d");
   };
 
-  const createTheAgents = () => {
-    for (let i = 0; i < numberOfAgents; i++) {
+  // Init the chart
+  const initChart = () => {
+    chart = document.getElementById("chart-container");
+    Highcharts.chart("chart-container", {
+      title: {
+        text: "Evolution de l'épidémie",
+      },
+      chart: {
+        height: 200,
+        width: canvas.y,
+        type: "area",
+        events: {
+          load: function () {
+            // set up the updating of the chart each second
+            var series = this.series[0];
+            setInterval(function () {
+              var y = agents.filter((e) => e.isSick).length;
+              var x = currentFrame / simDay;
+              series.addPoint([x, y], true, false);
+            }, 250);
+          },
+        },
+      },
+      accessibility: {
+        announceNewData: {
+          enabled: true,
+          minAnnounceInterval: 15000,
+          announcementFormatter: function (allSeries, newSeries, newPoint) {
+            if (newPoint) {
+              return "New point added. Value: " + newPoint.y;
+            }
+            return false;
+          },
+        },
+      },
+      xAxis: {
+        allowDecimals: false,
+        labels: {
+          formatter: function () {
+            return this.value; // clean, unformatted number for year
+          },
+        },
+      },
+      yAxis: {
+        labels: {
+          formatter: function () {
+            return this.value;
+          },
+        },
+      },
+      // tooltip: {
+      //   pointFormat:
+      //     "{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}",
+      // },
+      plotOptions: {
+        area: {
+          pointStart: 0,
+          marker: {
+            enabled: false,
+            symbol: "circle",
+            radius: 1,
+            states: {
+              hover: {
+                enabled: true,
+              },
+            },
+          },
+        },
+      },
+      series: [
+        {
+          name: "Population malade",
+          data: [],
+        },
+      ],
+    });
+  };
+
+  // Create the agents
+  const createTheAgents = (nb) => {
+    for (let i = 0; i < nb; i++) {
       // Starting Position
-      var x = Math.random() * (canvasSize.x - radius * 2) + radius;
-      var y = Math.random() * (canvasSize.y - radius * 2) + radius;
+      var x = Math.random() * (canvas.x - radius * 2) + radius;
+      var y = Math.random() * (canvas.y - radius * 2) + radius;
 
       // Speed in x and y direction
-      var dx = Math.random() - 0.5;
-      var dy = Math.random() - 0.5;
+      var dx = (Math.random() - 0.5) * fpsFactor * speedModulator;
+      var dy = (Math.random() - 0.5) * fpsFactor * speedModulator;
 
       // Initial condition
-      var isSick = Math.random() < 0.5 ? true : false;
+      var isSick = Math.random() < initialSickPercentage ? true : false;
 
       agents.push(new Agent(x, y, dx, dy, isSick));
     }
   };
 
-  // Start the animation
-
   // Animate the canvas
   const animate = () => {
-    requestAnimationFrame(animate);
     currentFrame++;
     // Move each agent
-    if (currentFrame % ralenti === 0) {
-      c.clearRect(0, 0, canvasSize.x, canvasSize.y);
+    if (currentFrame % (defaultFps / fps) === 0) {
+      c.clearRect(0, 0, canvas.x, canvas.y);
       for (let i = 0; i < numberOfAgents; i++) {
         agents[i].update();
       }
     }
+    setCurrentSickPop(agents.filter((e) => e.isSick).length);
+    setCurrentImmunizedPop(agents.filter((e) => e.isImmunized).length);
+    setCurrentDay((currentFrame / simDay).toFixed(0));
+
+    if (currentFrame % 60 === 0) {
+      // console.log("updating chart");
+    }
+
+    requestAnimationFrame(animate);
   };
 
   // Agent class
@@ -77,31 +193,45 @@ const SimulationPage = () => {
     this.radius = radius;
     this.isSick = isSick;
     this.isAwareThatSick = false;
+    this.awareOn = 0;
     this.sickOn = 0;
+    this.healedOn = 0;
     this.isImmunized = false;
     this.isDead = false;
-
-    // Can turn into sick if near to sick agent = Recieve the infection
-    this.closeToSickAgent = function () {
-      // add a proba here
-      this.isSick = true;
-      this.sickOn = currentFrame;
-    };
+    this.R = 0; // how many agents I contamined
+    this.closeAgents = [];
 
     // If sick, the agent will be contagious = Give the infection
     this.spreadTheInfection = function () {
+      this.closeAgents
+        .filter((agent) => {
+          return (
+            agent.x <= this.x + 2 * contagionRadius &&
+            agent.x >= this.x - 2 * contagionRadius &&
+            agent.y <= this.y + 2 * contagionRadius &&
+            agent.y >= this.y - 2 * contagionRadius &&
+            !agent.isImmunized &&
+            !agent.isSick
+          );
+        })
+        .map((item, i) => {
+          if (Math.random() < gettingSickProba) {
+            item.isSick = true;
+            this.R++;
+          }
+          item.sickOn = currentFrame;
+        });
+    };
+
+    // Get the closeAgents
+    this.getCloseAgents = () => {
       this.closeAgents = agents.filter((agent) => {
         return (
-          agent.x < this.x + 2 * contagionRadius &&
-          agent.x > this.x - 2 * contagionRadius &&
-          agent.y < this.y + 2 * contagionRadius &&
-          agent.y > this.y - 2 * contagionRadius &&
-          !agent.isImmunized &&
-          !agent.isSick
+          agent.x <= this.x + 2 * distancingRadius &&
+          agent.x >= this.x - 2 * distancingRadius &&
+          agent.y <= this.y + 2 * distancingRadius &&
+          agent.y >= this.y - 2 * distancingRadius
         );
-      });
-      this.closeAgents.map((item, i) => {
-        return this.closeAgents[i].closeToSickAgent();
       });
     };
 
@@ -110,11 +240,17 @@ const SimulationPage = () => {
         this.spreadTheInfection();
         if (
           currentFrame >
-          this.sickOn +
-            (1 / ralenti) * timeToHeal +
-            Math.floor((Math.random() * timeToHeal) / 5)
+          this.sickOn + timeToSymptoms + (Math.random() - 0.5) * 2 * 2 * simDay
+        ) {
+          this.isAwareThatSick = true;
+          this.awareOn = currentFrame;
+        }
+        if (
+          currentFrame >
+          this.sickOn + timeToHeal + (Math.random() - 0.5) * 2 * 3 * simDay
         ) {
           this.heal();
+          this.healedOn = currentFrame;
         }
       }
     };
@@ -132,48 +268,110 @@ const SimulationPage = () => {
       if (!this.isSick) {
         c.fillStyle = "white";
       }
-      if (this.isImmunized) {
-        c.fillStyle = "yellow";
-      }
       if (this.isSick) {
         c.fillStyle = "red";
+      }
+      // if (this.isAwareThatSick) {
+      //   c.fillStyle = "blue";
+      // }
+      if (this.isImmunized) {
+        c.fillStyle = "yellow";
       }
       c.fill();
     };
 
-    // Make them move !
-    this.update = function () {
-      if (this.x + this.radius > canvasSize.x || this.x - this.radius < 0) {
-        this.dx = -this.dx;
+    this.wander = function () {
+      // If social distancing, stay away from others
+
+      // Basic rule to stay in the canvas
+      if (
+        this.x + this.radius > canvas.x ||
+        this.x - this.radius < 0 ||
+        this.y + this.radius > canvas.y ||
+        this.y - this.radius < 0
+      ) {
+        if (this.x + this.radius > canvas.x || this.x - this.radius < 0) {
+          this.dx = -this.dx;
+        }
+        if (this.y + this.radius > canvas.y || this.y - this.radius < 0) {
+          this.dy = -this.dy;
+        }
+      }
+      // Social distancing
+      else if (isSocialDistancing) {
+        // Bounce like a big fat circle
+        this.nearestAgent = this.closeAgents[0];
+        if (Math.sign(this.nearestAgent.x - this.x) === Math.sign(this.dx)) {
+          this.dx = -this.dx;
+        }
+        if (Math.sign(this.nearestAgent.y - this.y) === Math.sign(this.dy)) {
+          this.dy = -this.dy;
+        }
       }
 
-      if (this.y + this.radius > canvasSize.y || this.y - this.radius < 0) {
-        this.dy = -this.dy;
-      }
+      // Move the agent
       this.x += this.dx;
       this.y += this.dy;
+    };
+
+    // Make them move !
+    this.update = function () {
+      this.getCloseAgents();
+      this.wander();
 
       this.draw();
-
-      setCurrentSickPop(agents.filter((e) => e.isSick).length);
-      setCurrentImmunizedPop(agents.filter((e) => e.isImmunized).length);
 
       this.live();
     };
   }
 
+  const debug = () => {
+    // console.log(agents);
+    var r0 = agents.map((item) => item.R);
+    let avg =
+      r0.reduce((previous, current) => (current += previous)) / r0.length;
+    console.log(avg);
+  };
+
+  const recieveActions = (type) => {
+    switch (type) {
+      case "masksOn":
+        console.log("masksOn");
+        contagionRadius = contagionRadius / 1.2;
+        gettingSickProba = gettingSickProba / 1.2;
+        break;
+      case "masksOff":
+        console.log("masksOff");
+        contagionRadius = contagionRadius * 1.2;
+        gettingSickProba = gettingSickProba * 1.2;
+        break;
+      case "socialDistancingOn":
+        console.log("socialDistancingOn");
+        isSocialDistancing = true;
+        break;
+      case "socialDistancingOff":
+        console.log("SocialDistancingOff");
+        isSocialDistancing = false;
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="main-page-body simulation-page">
-      <div className="stats-section">
-        <div>Population malade {currentSickPop}</div>
-        <div>Population immunisée {currentImmunizedPop}</div>
+      <div className="simulation-section">
+        <div id="chart-container" />
+        {/* <div>{popDensity * 1000 * 1000} hab/m2</div> */}
+        <canvas ref={myCanvas} id="canvas" width={canvas.x} height={canvas.y} />
       </div>
-
-      <canvas
-        ref={myCanvas}
-        id="canvas"
-        width={canvasSize.x}
-        height={canvasSize.y}
+      {/* <button onClick={debug}>DEBUG</button> */}
+      <SimulationPanel
+        agents={agents}
+        popSize={popSize}
+        currentDay={currentDay}
+        popDensity={popDensity}
+        sendActions={recieveActions}
       />
     </div>
   );
