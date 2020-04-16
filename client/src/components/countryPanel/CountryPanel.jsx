@@ -54,8 +54,6 @@ function CountryPanel(props) {
   const addToSelectedCountries = (country) => {
     if (selectedCountries.filter((el) => el.country === country).length === 0) {
       let s = [...selectedCountries];
-<<<<<<< HEAD
-      var randomColor = require("randomcolor");
       const colory = [
         "#ff5e33",
         "#ff3333",
@@ -78,9 +76,6 @@ function CountryPanel(props) {
         }
       }
       console.log(colorChosen);
-=======
-      var color = randomColor();
->>>>>>> ff74d7b723a64a7a204f2e6b301ae7862e47ef82
       s.push({
         country: country,
         color: color,
