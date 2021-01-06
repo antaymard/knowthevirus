@@ -20,7 +20,7 @@
   "homepage": "https://github.com/antaymard/knowthevirus#readme",
   "dependencies": {
     "@aternus/csv-to-xlsx": "^1.0.12",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "colors": "^1.4.0",
     "connect-flash": "^0.1.1",
     "csvtojson": "^2.0.10",
