@@ -54,7 +54,7 @@ function MainPage() {
             été contaminés en même temps. Elle permet de comparer l’évolution du
             virus, en compensant les décalages de la contamination entre les
             pays. L’axe des dates correspond donc à des dates relatives (x jours
-            après le 10e décès).
+            après le 10e décès). Le site devrait bientôt proposer des calculs. 
           </p>
         </div>
       </div>
